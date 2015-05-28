@@ -1,4 +1,5 @@
 #include "Kid_Layer.h"
+#include "Utility/Config.h"
 
 
 Kid_Layer::Kid_Layer()
@@ -13,7 +14,6 @@ Kid_Layer::~Kid_Layer()
 bool Kid_Layer::init()
 {
 	if (!Layer::init()) return false;
-
 
 
 	return true;

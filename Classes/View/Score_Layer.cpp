@@ -19,7 +19,7 @@ bool Score_Layer::init()
 	return true;
 }
 
-Score_Layer * Score_Layer::create_Start_Layer()
+Score_Layer * Score_Layer::create_Score_Layer()
 {
 	Score_Layer * layer = new Score_Layer();
 	layer->init();
