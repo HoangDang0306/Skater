@@ -19,30 +19,18 @@ public:
 		{
 		case Tags::GROUND:
 			return "GROUND";
-		case Tags::NINJA:
-			return "NINJA";
-		case Tags::SHURIKEN:
-			return "SHURIKEN";
-		case Tags::ENEMY:
-			return "ENEMY";
-		case Tags::TARGET:
-			return "TARGET";
-		case Tags::HEART:
-			return "HEART";
-		case Tags::ITEM:
-			return "ITEM";
+		case Tags::SKATER:
+			return "SKATER";
+		case Tags::OBTRUCTION:
+			return "OBTRUCTION";
 		default:
 			break;
 
 		}
 	}
 	static const int GROUND = 11;
-	static const int NINJA = 12;
-	static const int ENEMY = 13;
-	static const int SHURIKEN = 14;
-	static const int TARGET = 15;
-	static const int HEART = 16;
-	static const int ITEM = 17;
+	static const int SKATER = 12;
+	static const int OBTRUCTION = 13;
 	Tags();
 	~Tags();
 };

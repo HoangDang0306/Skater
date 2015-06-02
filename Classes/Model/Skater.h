@@ -16,17 +16,19 @@ private:
 	PhysicsBody *body;
 	bool isAlive;
 	bool isJumping;
-	bool isDeath;
+	
 public:
 	Skater();
 	~Skater();
-	static Skater* Instance;
+	//static Skater* Instance;
 	static Skater* create(string fileName);
+
 	void runAnimation(string name, int count, float time, bool isRepeat);
 	void runAnimation_Run();
 	void runAnimation_Jump();
 	void runAnimation_Fail();
 	void runAnimation_Down();
+
 	void jump();
 	bool onContactBegin(PhysicsContact &contact);
 };
