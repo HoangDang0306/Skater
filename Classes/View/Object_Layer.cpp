@@ -22,6 +22,8 @@ bool Object_Layer::init()
 	skater->runAnimation_Run();
 	this->addChild(skater);
 
+	//taạo chướng ngại vật
+	
 	return true;
 }
 

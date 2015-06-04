@@ -21,9 +21,6 @@ bool Background_Layer::init()
 	background->setScale(Config::getScale(background));
 	this->addChild(background, -1);*/
 	endlessBackground();
-
-
-
 	return true;
 }
 

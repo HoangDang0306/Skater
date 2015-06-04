@@ -23,6 +23,8 @@ public:
 			return "SKATER";
 		case Tags::OBTRUCTION:
 			return "OBTRUCTION";
+		case Tags::COIN:
+			return "COIN";
 		default:
 			break;
 
@@ -31,6 +33,7 @@ public:
 	static const int GROUND = 11;
 	static const int SKATER = 12;
 	static const int OBTRUCTION = 13;
+	static const int COIN = 14;
 	Tags();
 	~Tags();
 };

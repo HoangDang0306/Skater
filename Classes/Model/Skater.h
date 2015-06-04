@@ -20,7 +20,6 @@ private:
 public:
 	Skater();
 	~Skater();
-	//static Skater* Instance;
 	static Skater* create(string fileName);
 
 	void runAnimation(string name, int count, float time, bool isRepeat);
