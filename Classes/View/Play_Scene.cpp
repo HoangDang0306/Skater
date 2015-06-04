@@ -40,6 +40,7 @@ Scene * Play_Scene::create_Play_Scene()
 	//Gameplay
 	auto gamePlay = GamePlay::createGamePlayLayer();
 	gamePlay->Set_Object_Layer(object_Layer);
+	gamePlay->Set_Background_Layer(bgLayer);
 	scene->addChild(gamePlay);
 
 	return scene;

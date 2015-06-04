@@ -16,10 +16,6 @@ Background_Layer::~Background_Layer()
 bool Background_Layer::init()
 {
 	if (!Layer::init()) return false;
-	/*Sprite* background = Sprite::create("Background/Background_3.png");
-	background->setPosition(Config::centerPoint);
-	background->setScale(Config::getScale(background));
-	this->addChild(background, -1);*/
 
 	speed_Scroll = 150;
 	endlessBackground();
@@ -36,10 +32,8 @@ Background_Layer * Background_Layer::create_Background_Layer()
 	layer->autorelease();
 	return layer;
 }
+
 void Background_Layer::endlessBackground() {
-
-	//CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-
 	// Create the two background sprites which will alternate
 	_oddBackground = Sprite::create("Background/Background_3.png");
 	_evenBackground = Sprite::create("Background/Background_3.png");
@@ -58,8 +52,6 @@ void Background_Layer::endlessBackground() {
 }
 
 void Background_Layer::update(float dt) {
-	//CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-	// move them 100*dt pixels down
 
 	_oddBackground->setPosition(_oddBackground->getPosition().x - speed_Scroll * dt, _oddBackground->getPosition().y);
 	_evenBackground->setPosition(_evenBackground->getPosition().x - speed_Scroll * dt, _evenBackground->getPosition().y);
