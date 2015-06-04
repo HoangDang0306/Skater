@@ -67,5 +67,5 @@ void Skater::runAnimation_Fail()
 }
 void Skater::runAnimation_Down()
 {
-	runAnimation("down", 3, 0.5f, true);
+	runAnimation("down", 3, 0.1f, true);
 }
