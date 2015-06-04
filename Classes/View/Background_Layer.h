@@ -8,8 +8,11 @@ class Background_Layer : public Layer
 public:
 	Background_Layer();
 	~Background_Layer();
-	static Background_Layer * create_Start_Layer();
+	static Background_Layer * create_Background_Layer();
 	bool init();
+	void endlessBackground();
+	float speed_Scroll;
+	void update(float dt);
 };
 
 #endif
