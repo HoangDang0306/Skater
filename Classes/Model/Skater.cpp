@@ -25,16 +25,15 @@ bool Skater::init(string fileName)
 	_sprite->setPosition(0, 0);
 	this->addChild(_sprite);
 
-
-	
 	//-------------   Physic Body  --------------
 	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2(0, 0));
-	body->setGravityEnable(false);
 	body->setDynamic(true);
+	body->setMass(50.0f);
+	body->setAngularVelocityLimit(0.0f);
+	body->setRotationEnable(false);
 	body->setTag(Tags::SKATER);
 	body->setCollisionBitmask(1);
 	body->setContactTestBitmask(1);
-
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
 
@@ -67,10 +66,14 @@ void Skater::runAnimation_Fail()
 }
 void Skater::runAnimation_Down()
 {
-	runAnimation("down", 3, 0.5f, true);
+	runAnimation("down", 3, 0.1f, true);
 }
 
-
+void Skater::jump_Action()
+{
+	this->body->applyImpulse(Vec2(0, 10000));
+	log("aaaaaaaaaa");
+}
 
 bool Skater::onContactBegin(PhysicsContact& contact)
 {

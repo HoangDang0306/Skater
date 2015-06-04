@@ -1,5 +1,5 @@
 #include "Background_Layer.h"
-#include "Other/Config.h"
+#include "Utility/Config.h"
 
 Sprite* _oddBackground;
 Sprite* _evenBackground;
@@ -20,6 +20,8 @@ bool Background_Layer::init()
 	background->setPosition(Config::centerPoint);
 	background->setScale(Config::getScale(background));
 	this->addChild(background, -1);*/
+
+	speed_Scroll = 150;
 	endlessBackground();
 	return true;
 }
@@ -33,7 +35,7 @@ Background_Layer * Background_Layer::create_Background_Layer()
 }
 void Background_Layer::endlessBackground() {
 
-	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+	//CCSize winSize = CCDirector::sharedDirector()->getWinSize();
 
 	// Create the two background sprites which will alternate
 	_oddBackground = Sprite::create("Background/Background_3.png");
@@ -41,8 +43,8 @@ void Background_Layer::endlessBackground() {
 	_oddBackground->setScale(Config::getScale(_oddBackground));
 	_evenBackground->setScale(Config::getScale(_evenBackground));
 	// One starts dead centre and one starts exactly one screen height above
-	_oddBackground->setPosition(winSize.width / 2, winSize.height / 2);
-	_evenBackground->setPosition(winSize.width / 2 + (winSize.width), winSize.height/2);
+	_oddBackground->setPosition(Config::centerPoint);
+	_evenBackground->setPosition(Config::screenSize.width * 3 / 2, Config::screenSize.height / 2);
 
 	this->addChild(_oddBackground);
 	this->addChild(_evenBackground);
@@ -53,17 +55,16 @@ void Background_Layer::endlessBackground() {
 }
 
 void Background_Layer::update(float dt) {
-	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-
+	//CCSize winSize = CCDirector::sharedDirector()->getWinSize();
 	// move them 100*dt pixels down
 
-	_oddBackground->setPosition(_oddBackground->getPosition().x - 150 * dt, _oddBackground->getPosition().y);
-	_evenBackground->setPosition(_evenBackground->getPosition().x - 150 * dt, _evenBackground->getPosition().y);
+	_oddBackground->setPosition(_oddBackground->getPosition().x - speed_Scroll * dt, _oddBackground->getPosition().y);
+	_evenBackground->setPosition(_evenBackground->getPosition().x - speed_Scroll * dt, _evenBackground->getPosition().y);
 
 	// reset position when they are off from view.
-	if (_oddBackground->getPosition().x<-winSize.width / 2)
+	if (_oddBackground->getPosition().x < -Config::screenSize.width / 2)
 	{
-		_oddBackground->setPosition(winSize / 2);
-		_evenBackground->setPosition(winSize.width / 2 + winSize.width, winSize.height/2);
+		_oddBackground->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 2);
+		_evenBackground->setPosition(Config::screenSize.width / 2 + Config::screenSize.width, Config::screenSize.height / 2);
 	}
 }
