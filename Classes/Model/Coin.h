@@ -1,5 +1,5 @@
-#ifndef _Obstruction_
-#define _Obstruction_
+#ifndef _Coin_
+#define _Coin_
 
 #include "cocos2d.h"
 #include <sstream>
@@ -8,16 +8,16 @@
 USING_NS_CC;
 using namespace std;
 
-class Obtruction : public Node
+class Coin : public Node
 {
 private:
 	Sprite* _sprite;
 	bool init(string fileName);
 	PhysicsBody *body;
 public:
-	Obtruction();
-	~Obtruction();
-	static Obtruction* create(string fileName);
+	Coin();
+	~Coin();
+	static Coin* create(string fileName);
 };
 
 

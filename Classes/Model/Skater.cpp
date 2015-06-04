@@ -10,7 +10,6 @@ Skater* Skater::create(string fileName)
 	Skater* skater = new Skater();
 	skater->init(fileName);
 	skater->autorelease();
-	//Skater::Instance = skater;
 	return skater;
 }
 

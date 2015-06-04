@@ -19,9 +19,6 @@ bool Background_Layer::init()
 
 	speed_Scroll = 150;
 	endlessBackground();
-
-
-
 	return true;
 }
 
