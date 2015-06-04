@@ -10,6 +10,8 @@ public:
 	~Background_Layer();
 	static Background_Layer * create_Background_Layer();
 	bool init();
+	void endlessBackground();
+	void update(float dt);
 };
 
 #endif

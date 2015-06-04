@@ -17,7 +17,8 @@ bool Object_Layer::init()
 
 	//tạo animation
 	Skater* skater = Skater::create("0.png");
-	skater->setPosition(Config::centerPoint.x-200, Config::centerPoint.y-200);
+	skater->setPosition(Config::centerPoint.x-250, Config::centerPoint.y-150);
+	skater->setScale(1.5);
 	skater->runAnimation_Run();
 	this->addChild(skater);
 
