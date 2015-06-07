@@ -28,7 +28,7 @@ public:
 	void runAnimation_Fail();
 	void runAnimation_Down();
 
-	void jump_Action(float speed);
+	void jump_Action();
 	bool onContactBegin(PhysicsContact &contact);
 };
 

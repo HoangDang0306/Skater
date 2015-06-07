@@ -13,6 +13,7 @@ public:
 	bool init();
 	//Object
 	Skater * skater;
+	void Spawn_Obstruction(float dt);
 	//Physics
 	PhysicsWorld * physicsWorld;
 	void SetPhysicsWorld(PhysicsWorld *world);

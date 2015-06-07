@@ -2,6 +2,7 @@
 #include "Other/Config.h"
 #include "Other/XHelper.h"
 #include "Model/Skater.h"
+#include "Model/Obstruction.h"
 
 Object_Layer::Object_Layer()
 {
@@ -22,10 +23,6 @@ bool Object_Layer::init()
 	skater->runAnimation_Run();
 	this->addChild(skater);
 
-<<<<<<< HEAD
-	//taạo chướng ngại vật
-	
-=======
 	//Road
 	Node * road = Node::create();
 	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 9);
@@ -35,7 +32,6 @@ bool Object_Layer::init()
 	road->setPhysicsBody(body_Road);
 	this->addChild(road);
 
->>>>>>> 37d04d520f985c23e3011c17a61feb06816080fe
 	return true;
 }
 
@@ -47,7 +43,18 @@ Object_Layer * Object_Layer::create_Object_Layer()
 	return layer;
 }
 
-void Object_Layer::SetPhysicsWorld(PhysicsWorld *world)
+void Object_Layer::SetPhysicsWorld(PhysicsWorld * world)
 {
 	this->physicsWorld = world;
+}
+
+void Object_Layer::Spawn_Obstruction(float dt)
+{
+	auto obs = Obtruction::create("Obtruction/car1.png");
+	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/2));
+	auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width, 0));
+	obs->runAction(moveObs);
+	this->addChild(obs);
+	
 }

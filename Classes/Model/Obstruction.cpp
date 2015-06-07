@@ -23,12 +23,10 @@ bool Obtruction::init(string fileName)
 	_sprite->setPosition(0, 0);
 	this->addChild(_sprite);
 
-
-	
 	//-------------   Physic Body  --------------
-	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2(0, 0));
+	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
 	body->setGravityEnable(false);
-	body->setDynamic(true);
+	body->setDynamic(false);
 	body->setTag(Tags::OBTRUCTION);
 	body->setCollisionBitmask(1);
 	body->setContactTestBitmask(1);
