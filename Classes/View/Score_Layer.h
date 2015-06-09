@@ -10,6 +10,13 @@ public:
 	~Score_Layer();
 	static Score_Layer * create_Score_Layer();
 	bool init();
+
+	//Score
+	Label * current_Score;
+	Label * best_Score;
+
+	//Coin
+	Label * coin;
 };
 
 #endif

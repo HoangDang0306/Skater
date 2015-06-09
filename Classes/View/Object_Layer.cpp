@@ -25,8 +25,8 @@ bool Object_Layer::init()
 
 	//Road
 	Node * road = Node::create();
-	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 9);
-	road->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 10.5);
+	road->setAnchorPoint(Vec2::ANCHOR_MIDDLE_TOP);
 	PhysicsBody * body_Road = PhysicsBody::createBox(Size(Config::screenSize.width, Config::screenSize.height / 8), PHYSICSBODY_MATERIAL_DEFAULT, Vec2::ZERO);
 	body_Road->setDynamic(false);
 	road->setPhysicsBody(body_Road);
@@ -52,9 +52,8 @@ void Object_Layer::Spawn_Obstruction(float dt)
 {
 	auto obs = Obtruction::create("Obtruction/car1.png");
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/2));
-	auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width, 0));
-	obs->runAction(moveObs);
+	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/3));
 	this->addChild(obs);
-	
+	auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	obs->runAction(moveObs);	
 }
