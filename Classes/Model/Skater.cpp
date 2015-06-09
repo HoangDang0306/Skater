@@ -88,11 +88,25 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 		{
 			log("Noooooooooo");
 			isAlive = false;
-			auto e = a->getTag() == Tags::SKATER ? a : b;
-			e->getNode()->removeFromParent();
+			/*auto e = a->getTag() == Tags::SKATER ? a : b;
+			e->getNode()->removeFromParent();*/
 			//PhiTieuLayer::instance->matMau();
 		}
 	}
 
+		//----------------   Va chạm với coin   ---------
+		else if(a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+		{
+			if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
+				|| (a->getTag() == Tags::COIN && b->getTag() == Tags::SKATER))
+			{
+				log("Yesssssss");
+				auto e = a->getTag() == Tags::COIN ? a : b;
+				e->getNode()->removeFromParent();
+				//PhiTieuLayer::instance->matMau();
+			}
+	}
+
 	return false;
 }
+

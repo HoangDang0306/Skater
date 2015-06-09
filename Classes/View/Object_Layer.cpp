@@ -2,15 +2,11 @@
 #include "Other/Config.h"
 #include "Other/XHelper.h"
 #include "Model/Skater.h"
-<<<<<<< HEAD
 #include "Model/Coin.h"
 USING_NS_CC;
-=======
-#include "Model/Obstruction.h"
->>>>>>> 805f9592c4a5bf8fa8e0f0f884bc6e20c323bf0c
 
-#include <climits>
-#include <cstdlib>
+#include "Model/Obstruction.h"
+
 #include <iostream>
 using namespace std;
 Object_Layer::Object_Layer()
@@ -32,11 +28,7 @@ bool Object_Layer::init()
 	skater->runAnimation_Run();
 	this->addChild(skater);
 
-<<<<<<< HEAD
-	
-	
-=======
->>>>>>> 805f9592c4a5bf8fa8e0f0f884bc6e20c323bf0c
+
 	//Road
 	Node * road = Node::create();
 	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 10.5);
@@ -45,6 +37,7 @@ bool Object_Layer::init()
 	body_Road->setDynamic(false);
 	road->setPhysicsBody(body_Road);
 	this->addChild(road);
+	
 	/*
 	//Coin
 	coin = Coin::create("0.png");
@@ -59,7 +52,6 @@ bool Object_Layer::init()
 	coin1->runAnimation("coin2", 7, 0.5f, true);
 	this->addChild(coin1);
 	*/
-
 
 	return true;
 }
@@ -77,8 +69,7 @@ void Object_Layer::SetPhysicsWorld(PhysicsWorld * world)
 	this->physicsWorld = world;
 }
 
-<<<<<<< HEAD
-=======
+
 void Object_Layer::Spawn_Obstruction(float dt)
 {
 	auto obs = Obtruction::create("Obtruction/car1.png");
@@ -88,4 +79,20 @@ void Object_Layer::Spawn_Obstruction(float dt)
 	auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	obs->runAction(moveObs);	
 }
->>>>>>> 805f9592c4a5bf8fa8e0f0f884bc6e20c323bf0c
+
+void Object_Layer::Spawn_Coin(float dt)
+{
+	for (int i = 0; i < 1; i++)
+	{
+	coin = Coin::create("0.png");
+	coin->setScale(0.3);
+	coin->runAnimation("coin", 7, 0.5f, true);
+	coin->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	coin->setPosition(Point(Config::screenSize.width + 40 * i, Config::screenSize.height / 2));
+	this->addChild(coin);
+	auto moveObs = MoveBy::create(8, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	coin->runAction(moveObs);
+	}
+}
+
+
