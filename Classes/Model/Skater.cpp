@@ -1,6 +1,6 @@
 ﻿#include "Skater.h"
-#include "Other/XHelper.h"
-#include "Other/Tags.h"
+#include "Utility/XHelper.h"
+#include "Utility/Tags.h"
 
 Skater::Skater(){}
 Skater::~Skater(){}
@@ -18,6 +18,7 @@ bool Skater::init(string fileName)
 	if (!Node::init())
 		return false;
 	isAlive = true;
+	isContactWithObs = false;
 	//Skater::Instance = this;
 
 	//-------------  Khởi tạo sprite chính -------------
@@ -32,8 +33,9 @@ bool Skater::init(string fileName)
 	body->setAngularVelocityLimit(0.0f);
 	body->setRotationEnable(false);
 	body->setTag(Tags::SKATER);
-	body->setCollisionBitmask(1);
+	body->setCollisionBitmask(0x02);
 	body->setContactTestBitmask(1);
+	body->setCategoryBitmask(0x01);
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
 
@@ -79,20 +81,55 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	auto a = contact.getShapeA()->getBody();
 	auto b = contact.getShapeB()->getBody();
 
-
 	//----------------   Va chạm vơi chướng ngại vật   ---------
 	if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
 	{
-		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBTRUCTION)
-			|| (a->getTag() == Tags::OBTRUCTION && b->getTag() == Tags::SKATER))
+		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
+			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 		{
-			log("Noooooooooo");
 			isAlive = false;
-			auto e = a->getTag() == Tags::SKATER ? a : b;
-			e->getNode()->removeFromParent();
+			/*auto e = a->getTag() == Tags::SKATER ? a : b;
+			e->getNode()->removeFromParent();*/
 			//PhiTieuLayer::instance->matMau();
 		}
 	}
 
-	return false;
+	//Va chạm với COIN
+	if ((a->getCategoryBitmask() & b->getCollisionBitmask()) == 0 || (b->getCategoryBitmask() & a->getCollisionBitmask()) == 0)
+	{
+		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+		{
+			if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
+			{
+				b->getNode()->removeFromParent();
+			}
+		}
+
+		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+		{
+			if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
+			{
+				a->getNode()->removeFromParent();
+			}
+		}
+	}
+	
+
+	//if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+	//{
+	//	if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
+	//	{
+	//		b->getNode()->removeFromParent();
+	//	}
+	//}
+	//
+	//if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+	//{
+	//	if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
+	//	{
+	//		a->getNode()->removeFromParent();
+	//	}
+	//}
+
+	return true;
 }

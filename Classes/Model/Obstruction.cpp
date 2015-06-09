@@ -1,6 +1,6 @@
 ﻿#include "Obstruction.h"
-#include "Other/XHelper.h"
-#include "Other/Tags.h"
+#include "Utility/XHelper.h"
+#include "Utility/Tags.h"
 
 Obtruction::Obtruction(){}
 Obtruction::~Obtruction(){}
@@ -25,15 +25,12 @@ bool Obtruction::init(string fileName)
 
 	//-------------   Physic Body  --------------
 	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
-	body->setGravityEnable(false);
-	body->setDynamic(false);
-	body->setTag(Tags::OBTRUCTION);
+	body->setDynamic(true);
+	body->setTag(Tags::OBSTRUCTION);
 	body->setCollisionBitmask(1);
 	body->setContactTestBitmask(1);
-
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
 	
-
 	return true;
 }

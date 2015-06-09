@@ -14,6 +14,7 @@ public:
 	//Object
 	Skater * skater;
 	void Spawn_Obstruction(float dt);
+	void Spawn_Coin(float dt);
 	//Physics
 	PhysicsWorld * physicsWorld;
 	void SetPhysicsWorld(PhysicsWorld *world);

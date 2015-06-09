@@ -23,7 +23,9 @@ bool GamePlay::init()
 	touchListener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 2);
+	this->scheduleUpdate();
 
 	return true;
 }
@@ -55,4 +57,12 @@ void GamePlay::Set_Background_Layer(Background_Layer * layer)
 void GamePlay::Set_Score_Layer(Score_Layer * layer)
 {
 	this->score_Layer = layer;
+}
+
+void GamePlay::update(float dt)
+{
+	if (object_Layer->skater->isAlive = false)
+	{
+		//object_Layer->
+	}
 }

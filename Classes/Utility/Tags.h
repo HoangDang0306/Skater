@@ -17,18 +17,16 @@ public:
 	{
 		switch (tag)
 		{
-		case Tags::GROUND:
-			return "GROUND";
-		case Tags::NINJA:
-			return "NINJA";
-		case Tags::SHURIKEN:
-			return "SHURIKEN";
-		case Tags::ENEMY:
-			return "ENEMY";
-		case Tags::TARGET:
-			return "TARGET";
-		case Tags::HEART:
-			return "HEART";
+		case Tags::COIN:
+			return "COIN";
+		case Tags::OBSTRUCTION:
+			return "OBSTRUCTION";
+		case Tags::SKATER:
+			return "SKATER";
+		case Tags::COIN_SKATER_COLLISION:
+			return "COIN_SKATER_COLLISION";
+		case Tags::COIN_SKATER_CATEGORY:
+			return "COIN_SKATER_CATEGORY";
 		case Tags::ITEM:
 			return "ITEM";
 		default:
@@ -36,12 +34,12 @@ public:
 
 		}
 	}
-	static const int GROUND = 11;
-	static const int NINJA = 12;
-	static const int ENEMY = 13;
+	static const int COIN = 11;
+	static const int OBSTRUCTION = 12;
+	static const int SKATER = 13;
 	static const int SHURIKEN = 14;
-	static const int TARGET = 15;
-	static const int HEART = 16;
+	static const int COIN_SKATER_COLLISION = 15;
+	static const int COIN_SKATER_CATEGORY = 16;
 	static const int ITEM = 17;
 	Tags();
 	~Tags();

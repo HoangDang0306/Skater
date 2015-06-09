@@ -14,12 +14,13 @@ private:
 	Sprite * _sprite;
 	bool init(string fileName);
 	PhysicsBody * body;
-	bool isAlive;
-	bool isJumping;
 	
 public:
 	Skater();
 	~Skater();
+	bool isAlive;
+	bool isJumping;
+	bool isContactWithObs;
 	static Skater* create(string fileName);
 
 	void runAnimation(string name, int count, float time, bool isRepeat);

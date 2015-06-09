@@ -31,6 +31,9 @@ public:
 
 	//Touch
 	bool onTouchBegan(Touch *touch, Event *unused_event);
+
+	//Update
+	void update(float dt);
 };
 
 #endif
