@@ -3,6 +3,7 @@
 #include "View/Background_Layer.h"
 #include "Utility/Config.h"
 #include "Control/GamePlay.h"
+#include "View/Score_Layer.h"
 
 Play_Scene::Play_Scene()
 {
@@ -37,10 +38,15 @@ Scene * Play_Scene::create_Play_Scene()
 	object_Layer->SetPhysicsWorld(scene->getPhysicsWorld());
 	scene->addChild(object_Layer);
 
+	//Score
+	auto score_layer = Score_Layer::create_Score_Layer();
+	scene->addChild(score_layer);
+
 	//Gameplay
 	auto gamePlay = GamePlay::createGamePlayLayer();
 	gamePlay->Set_Object_Layer(object_Layer);
 	gamePlay->Set_Background_Layer(bgLayer);
+	gamePlay->Set_Score_Layer(score_layer);
 	scene->addChild(gamePlay);
 
 	return scene;

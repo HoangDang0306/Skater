@@ -69,9 +69,9 @@ void Skater::runAnimation_Down()
 	runAnimation("down", 3, 0.1f, true);
 }
 
-void Skater::jump_Action(float speed)
+void Skater::jump_Action()
 {
-	this->body->applyImpulse(Vec2(0, 5000 * speed));
+	this->body->applyImpulse(Vec2(0, 12000));
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)

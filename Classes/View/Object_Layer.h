@@ -21,8 +21,14 @@ public:
 	~Object_Layer();
 	static Object_Layer * create_Object_Layer();
 	bool init();
+<<<<<<< HEAD
 	
 
+=======
+	//Object
+	Skater * skater;
+	void Spawn_Obstruction(float dt);
+>>>>>>> 805f9592c4a5bf8fa8e0f0f884bc6e20c323bf0c
 	//Physics
 	PhysicsWorld * physicsWorld;
 	void SetPhysicsWorld(PhysicsWorld *world);
