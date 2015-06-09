@@ -18,6 +18,7 @@ public:
 	Coin();
 	~Coin();
 	static Coin* create(string fileName);
+	void runAnimation(string name, int count, float time, bool isRepeat);
 };
 
 

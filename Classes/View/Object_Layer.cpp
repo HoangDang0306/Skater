@@ -2,7 +2,13 @@
 #include "Other/Config.h"
 #include "Other/XHelper.h"
 #include "Model/Skater.h"
+#include "Model/Coin.h"
+USING_NS_CC;
 
+#include <climits>
+#include <cstdlib>
+#include <iostream>
+using namespace std;
 Object_Layer::Object_Layer()
 {
 }
@@ -22,10 +28,8 @@ bool Object_Layer::init()
 	skater->runAnimation_Run();
 	this->addChild(skater);
 
-<<<<<<< HEAD
-	//taạo chướng ngại vật
 	
-=======
+	
 	//Road
 	Node * road = Node::create();
 	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 9);
@@ -34,8 +38,22 @@ bool Object_Layer::init()
 	body_Road->setDynamic(false);
 	road->setPhysicsBody(body_Road);
 	this->addChild(road);
+	/*
+	//Coin
+	coin = Coin::create("0.png");
+	coin->setPosition(Config::centerPoint.x + 250, Config::centerPoint.y );
+	coin->setScale(0.4);
+	coin->runAnimation("coin",7,0.5f,true);
+	this->addChild(coin);
 
->>>>>>> 37d04d520f985c23e3011c17a61feb06816080fe
+	coin1 = Coin::create("0.png");
+	coin1->setPosition(Config::centerPoint.x + 150, Config::centerPoint.y);
+	coin1->setScale(0.4);
+	coin1->runAnimation("coin2", 7, 0.5f, true);
+	this->addChild(coin1);
+	*/
+
+
 	return true;
 }
 
@@ -51,3 +69,4 @@ void Object_Layer::SetPhysicsWorld(PhysicsWorld *world)
 {
 	this->physicsWorld = world;
 }
+

@@ -2,7 +2,6 @@
 #include "Model/Skater.h"
 #include "View/Object_Layer.h"
 
-
 GamePlay::GamePlay()
 {
 }
@@ -36,7 +35,8 @@ GamePlay * GamePlay::createGamePlayLayer()
 bool GamePlay::onTouchBegan(Touch *touch, Event *unused_event)
 {
 	object_Layer->skater->jump_Action(2);
-	background_Layer->speed_Scroll += 100;
+	object_Layer->scrollDecrement.x+=0.05;
+	background_Layer->speed_Scroll += 5;
 	return true;
 }
 
