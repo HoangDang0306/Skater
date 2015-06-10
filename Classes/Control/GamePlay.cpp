@@ -38,8 +38,6 @@ GamePlay * GamePlay::createGamePlayLayer()
 
 bool GamePlay::onTouchBegan(Touch *touch, Event *unused_event)
 {
-
-	//background_Layer->speed_Scroll += 5;
 	object_Layer->skater->jump_Action();
 	return true;
 }

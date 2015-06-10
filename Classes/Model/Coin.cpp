@@ -29,7 +29,7 @@ bool Coin::init(string fileName)
 	//-------------   Physic Body  --------------
 	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
 	body->setGravityEnable(false);
-	body->setDynamic(true);
+	body->setDynamic(false);
 	body->setTag(Tags::COIN);
 	body->setCollisionBitmask(1);
 	body->setContactTestBitmask(1);
@@ -37,7 +37,7 @@ bool Coin::init(string fileName)
 	
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
-
+	
 	return true;
 }
 

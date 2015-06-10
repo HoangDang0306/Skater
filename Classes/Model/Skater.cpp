@@ -58,7 +58,7 @@ void Skater::runAnimation_Run()
 
 void Skater::runAnimation_Jump()
 {
-	runAnimation("jump", 5, 0.5f, true);
+	runAnimation("jump", 5, 0.2f, false);
 }
 void Skater::runAnimation_Fail()
 {
@@ -72,6 +72,11 @@ void Skater::runAnimation_Down()
 void Skater::jump_Action()
 {
 	this->body->applyImpulse(Vec2(0, 12000));
+	this->runAnimation_Jump();
+	this->runAction(Sequence::create(
+		DelayTime::create(1),
+		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
+		nullptr));
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
@@ -88,15 +93,14 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 		{
 			log("Noooooooooo");
 			isAlive = false;
-			/*auto e = a->getTag() == Tags::SKATER ? a : b;
-			e->getNode()->removeFromParent();*/
+			auto e = a->getTag() == Tags::SKATER ? a : b;
+			e->getNode()->removeFromParent();
 			//PhiTieuLayer::instance->matMau();
 		}
-	}
+	
 
 		//----------------   Va chạm với coin   ---------
-		else if(a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
-		{
+	
 			if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
 				|| (a->getTag() == Tags::COIN && b->getTag() == Tags::SKATER))
 			{
@@ -104,6 +108,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 				auto e = a->getTag() == Tags::COIN ? a : b;
 				e->getNode()->removeFromParent();
 				//PhiTieuLayer::instance->matMau();
+			
 			}
 	}
 
