@@ -1,5 +1,6 @@
 ﻿#include "Coin.h"
 #include "Utility/Tags.h"
+#include "Utility/XHelper.h"
 
 Coin::Coin(){}
 Coin::~Coin(){}
@@ -21,7 +22,8 @@ bool Coin::init(string fileName)
 	_sprite = Sprite::create(fileName);
 	_sprite->setPosition(0, 0);
 	this->addChild(_sprite);
-
+	
+	
 	//---   Physic Body  ---
 	body = PhysicsBody::createEdgeBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f));
 	//body->setGravityEnable(false);
@@ -33,6 +35,11 @@ bool Coin::init(string fileName)
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
 
-
 	return true;
+}
+
+//Animation
+void Coin::runAnimation(string name, int count, float time, bool isRepeat)
+{
+	XHelper::runAnimation(name, count, time, true, this->_sprite);
 }

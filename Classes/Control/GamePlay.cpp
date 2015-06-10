@@ -3,7 +3,6 @@
 #include "View/Object_Layer.h"
 #include "Model/Obstruction.h"
 
-
 GamePlay::GamePlay()
 {
 }
@@ -24,7 +23,7 @@ bool GamePlay::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 2);
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 2);
 	this->scheduleUpdate();
 
 	return true;
@@ -40,7 +39,11 @@ GamePlay * GamePlay::createGamePlayLayer()
 
 bool GamePlay::onTouchBegan(Touch *touch, Event *unused_event)
 {
-	object_Layer->skater->jump_Action();
+	if (object_Layer->skater->isJumping == false)
+	{
+		object_Layer->skater->jump_Action();
+	}
+	
 	return true;
 }
 
