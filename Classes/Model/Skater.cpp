@@ -61,7 +61,7 @@ void Skater::runAnimation_Run()
 
 void Skater::runAnimation_Jump()
 {
-	runAnimation("jump", 5, 0.5f, true);
+	runAnimation("jump", 5, 0.2f, false);
 }
 void Skater::runAnimation_Fail()
 {
@@ -75,7 +75,15 @@ void Skater::runAnimation_Down()
 void Skater::jump_Action()
 {
 	this->body->applyImpulse(Vec2(0, 12000));
+//<<<<<<< HEAD
 	this->isJumping = true;
+//=======
+//	this->runAnimation_Jump();
+//	this->runAction(Sequence::create(
+//		DelayTime::create(1),
+//		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
+//		nullptr));
+//>>>>>>> 74851008b9733c5ef940cb9ae934db286e9e8b21
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
@@ -90,12 +98,12 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 		{
 			isAlive = false;
-			/*auto e = a->getTag() == Tags::SKATER ? a : b;
-			e->getNode()->removeFromParent();*/
+			auto e = a->getTag() == Tags::SKATER ? a : b;
+			e->getNode()->removeFromParent();
 			//PhiTieuLayer::instance->matMau();
 		}
 	}
-
+	
 	//Va cham voi ROAD
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::ROAD) || (a->getTag() == Tags::ROAD && b->getTag() == Tags::SKATER))
 	{
@@ -122,8 +130,5 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 		}
 	}
 
-	
-
 	return true;
 }
-

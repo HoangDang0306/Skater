@@ -28,9 +28,10 @@ void XHelper::runAnimation(string name, int count, float time, bool isRepeat, Sp
 		}
 
 		Action* action = nullptr;
-		if (isRepeat)
+		if (isRepeat= true)
 			action = RepeatForever::create(Animate::create(animation));
-		else action = Animate::create(animation);
+		if (isRepeat = false)
+			action = Animate::create(animation);
 
 
 		_sprite->runAction(action);

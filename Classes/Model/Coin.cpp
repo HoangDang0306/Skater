@@ -23,10 +23,10 @@ bool Coin::init(string fileName)
 	_sprite->setPosition(0, 0);
 	this->addChild(_sprite);
 	
-	
-	//---   Physic Body  ---
-	body = PhysicsBody::createEdgeBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f));
-	//body->setGravityEnable(false);
+
+	//-------------   Physic Body  --------------
+	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
+	body->setGravityEnable(false);
 	body->setDynamic(false);
 	body->setTag(Tags::COIN);
 	body->setCollisionBitmask(0x02);
@@ -34,7 +34,7 @@ bool Coin::init(string fileName)
 	body->setCategoryBitmask(0x01);
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
-
+	
 	return true;
 }
 
