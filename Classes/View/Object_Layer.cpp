@@ -68,19 +68,19 @@ void Object_Layer::Spawn_Obstruction(float dt)
 
 void Object_Layer::Spawn_Coin(float dt)
 {
-//<<<<<<< HEAD
-	//int random_SoLuong = cocos2d::random(3, 7);
-	//for (int i = 0; i < random_SoLuong; i++)
-	//{
-		auto coin = Coin::create("Coin/coin4.png");
-		coin->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-		coin->setPosition(Point(Config::screenSize.width /*+ i * coin->getContentSize().width*/, Config::screenSize.height / 2));
-		this->addChild(coin);
-		auto moveCoin = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
-		coin->runAction(moveCoin);
-	/*}*/
+////<<<<<<< HEAD
+//	//int random_SoLuong = cocos2d::random(3, 7);
+//	//for (int i = 0; i < random_SoLuong; i++)
+//	//{
+//		auto coin = Coin::create("Coin/coin4.png");
+//		coin->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+//		coin->setPosition(Point(Config::screenSize.width /*+ i * coin->getContentSize().width*/, Config::screenSize.height / 2));
+//		this->addChild(coin);
+//		auto moveCoin = MoveBy::create(, Vec2(-Config::screenSize.width * 3 / 2, 0));
+//		coin->runAction(moveCoin);
+//	/*}*/
 //=======
-	/*int min = 5.0;
+	int min = 5.0;
 	int max = 10.0;
 	int rangeDuration = max - min;
 	int randomDuration = (rand() % rangeDuration) + min;
@@ -109,6 +109,6 @@ void Object_Layer::Spawn_Coin(float dt)
 	
 		}
 	
-	}*/
+	}
 //>>>>>>> 74851008b9733c5ef940cb9ae934db286e9e8b21
 }
