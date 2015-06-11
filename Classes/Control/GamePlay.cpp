@@ -22,7 +22,7 @@ bool GamePlay::init()
 	touchListener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-	//this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 5);
 
 	return true;

@@ -58,9 +58,9 @@ void Object_Layer::Spawn_Obstruction(float dt)
 {
 	auto obs = Obtruction::create("Obtruction/car1.png");
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/3));
+	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/3.8));
 	this->addChild(obs);
-	auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	auto moveObs = MoveBy::create(4, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	obs->runAction(moveObs);	
 }
 
@@ -79,16 +79,16 @@ void Object_Layer::Spawn_Coin(float dt)
 		obs->setScale(0.3);
 		obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		obs->setPosition(Point(Config::screenSize.width + 40 * i, Config::screenSize.height / 2));
-		auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
+		auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
 		switch (k)
 		{
 		case 1:
-			obs->runAnimation("coin", 7, 0.5f, true);
+			obs->runAnimation("coin", 7, 0.8f, true);
 			this->addChild(obs);
 			obs->runAction(moveObs);
 			break;
 		case 2: 
-			obs->runAnimation("coin2", 7, 0.5f, true); 
+			obs->runAnimation("coin2", 7, 0.8f, true); 
 			this->addChild(obs);
 			obs->runAction(moveObs);
 			break;
