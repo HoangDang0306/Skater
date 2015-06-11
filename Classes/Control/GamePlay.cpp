@@ -2,6 +2,8 @@
 #include "Model/Skater.h"
 #include "View/Object_Layer.h"
 #include "Model/Obstruction.h"
+#include <sstream>
+using namespace std;
 
 GamePlay::GamePlay()
 {
@@ -22,9 +24,11 @@ bool GamePlay::init()
 	touchListener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-	//this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 2);
+
+	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 5);
 	this->scheduleUpdate();
+
 
 	return true;
 }
@@ -67,4 +71,9 @@ void GamePlay::update(float dt)
 	{
 		//object_Layer->
 	}
+
+	//Coin
+	stringstream ss;
+	ss << this->object_Layer->skater->coin;
+	this->score_Layer->coin->setString(ss.str());
 }

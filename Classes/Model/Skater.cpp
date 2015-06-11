@@ -20,7 +20,7 @@ bool Skater::init(string fileName)
 	isAlive = true;
 	isJumping = false;
 	isContactWithObs = false;
-	//Skater::Instance = this;
+	coin = 0;
 
 	//-------------  Khởi tạo sprite chính -------------
 	_sprite = Sprite::create(fileName);
@@ -75,15 +75,13 @@ void Skater::runAnimation_Down()
 void Skater::jump_Action()
 {
 	this->body->applyImpulse(Vec2(0, 12000));
-//<<<<<<< HEAD
 	this->isJumping = true;
-//=======
-//	this->runAnimation_Jump();
-//	this->runAction(Sequence::create(
-//		DelayTime::create(1),
-//		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
-//		nullptr));
-//>>>>>>> 74851008b9733c5ef940cb9ae934db286e9e8b21
+	this->runAnimation_Jump();
+	this->runAction(Sequence::create(
+		DelayTime::create(1),
+		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
+		nullptr));
+
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
@@ -98,9 +96,6 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 		{
 			isAlive = false;
-			auto e = a->getTag() == Tags::SKATER ? a : b;
-			e->getNode()->removeFromParent();
-			//PhiTieuLayer::instance->matMau();
 		}
 	}
 	
@@ -118,6 +113,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
 			{
 				b->getNode()->removeFromParent();
+				this->coin++;
 			}
 		}
 
@@ -126,6 +122,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
 			{
 				a->getNode()->removeFromParent();
+				this->coin++;
 			}
 		}
 	}

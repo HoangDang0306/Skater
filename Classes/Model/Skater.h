@@ -21,6 +21,7 @@ public:
 	bool isAlive;
 	bool isJumping;
 	bool isContactWithObs;
+	int coin;
 	static Skater* create(string fileName);
 
 	void runAnimation(string name, int count, float time, bool isRepeat);

@@ -62,24 +62,12 @@ void Object_Layer::Spawn_Obstruction(float dt)
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/3.5));
 	this->addChild(obs);
-	auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	auto moveObs = MoveBy::create(4, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	obs->runAction(moveObs);	
 }
 
 void Object_Layer::Spawn_Coin(float dt)
 {
-////<<<<<<< HEAD
-//	//int random_SoLuong = cocos2d::random(3, 7);
-//	//for (int i = 0; i < random_SoLuong; i++)
-//	//{
-//		auto coin = Coin::create("Coin/coin4.png");
-//		coin->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-//		coin->setPosition(Point(Config::screenSize.width /*+ i * coin->getContentSize().width*/, Config::screenSize.height / 2));
-//		this->addChild(coin);
-//		auto moveCoin = MoveBy::create(, Vec2(-Config::screenSize.width * 3 / 2, 0));
-//		coin->runAction(moveCoin);
-//	/*}*/
-//=======
 	int min = 5.0;
 	int max = 10.0;
 	int rangeDuration = max - min;
@@ -93,22 +81,20 @@ void Object_Layer::Spawn_Coin(float dt)
 		obs->setScale(0.3);
 		obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		obs->setPosition(Point(Config::screenSize.width + 40 * i, Config::screenSize.height / 2));
-		auto moveObs = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
+		auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
 		switch (k)
 		{
 		case 1:
-			obs->runAnimation("coin", 7, 0.5f, true);
+			obs->runAnimation("coin", 7, 0.8f, true);
 			this->addChild(obs);
 			obs->runAction(moveObs);
 			break;
 		case 2: 
-			obs->runAnimation("coin2", 7, 0.5f, true); 
+			obs->runAnimation("coin2", 7, 0.8f, true); 
 			this->addChild(obs);
 			obs->runAction(moveObs);
 			break;
 	
 		}
-	
 	}
-//>>>>>>> 74851008b9733c5ef940cb9ae934db286e9e8b21
 }
