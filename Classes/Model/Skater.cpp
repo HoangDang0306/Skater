@@ -75,15 +75,13 @@ void Skater::runAnimation_Down()
 void Skater::jump_Action()
 {
 	this->body->applyImpulse(Vec2(0, 12000));
-//<<<<<<< HEAD
 	this->isJumping = true;
-//=======
-//	this->runAnimation_Jump();
-//	this->runAction(Sequence::create(
-//		DelayTime::create(1),
-//		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
-//		nullptr));
-//>>>>>>> 74851008b9733c5ef940cb9ae934db286e9e8b21
+	this->runAnimation_Jump();
+	this->runAction(Sequence::create(
+		DelayTime::create(1),
+		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
+		nullptr));
+
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
