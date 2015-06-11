@@ -1,6 +1,6 @@
 ﻿#include "Skater.h"
-#include "Other/XHelper.h"
-#include "Other/Tags.h"
+#include "Utility/XHelper.h"
+#include "Utility/Tags.h"
 
 Skater::Skater(){}
 Skater::~Skater(){}
@@ -18,6 +18,8 @@ bool Skater::init(string fileName)
 	if (!Node::init())
 		return false;
 	isAlive = true;
+	isJumping = false;
+	isContactWithObs = false;
 	//Skater::Instance = this;
 
 	//-------------  Khởi tạo sprite chính -------------
@@ -32,8 +34,9 @@ bool Skater::init(string fileName)
 	body->setAngularVelocityLimit(0.0f);
 	body->setRotationEnable(false);
 	body->setTag(Tags::SKATER);
-	body->setCollisionBitmask(1);
+	body->setCollisionBitmask(0x02);
 	body->setContactTestBitmask(1);
+	body->setCategoryBitmask(0x01);
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
 
@@ -72,11 +75,15 @@ void Skater::runAnimation_Down()
 void Skater::jump_Action()
 {
 	this->body->applyImpulse(Vec2(0, 12000));
-	this->runAnimation_Jump();
-	this->runAction(Sequence::create(
-		DelayTime::create(1),
-		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
-		nullptr));
+//<<<<<<< HEAD
+	this->isJumping = true;
+//=======
+//	this->runAnimation_Jump();
+//	this->runAction(Sequence::create(
+//		DelayTime::create(1),
+//		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
+//		nullptr));
+//>>>>>>> 74851008b9733c5ef940cb9ae934db286e9e8b21
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
@@ -84,34 +91,44 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	auto a = contact.getShapeA()->getBody();
 	auto b = contact.getShapeB()->getBody();
 
-
 	//----------------   Va chạm vơi chướng ngại vật   ---------
 	if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
 	{
-		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBTRUCTION)
-			|| (a->getTag() == Tags::OBTRUCTION && b->getTag() == Tags::SKATER))
+		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
+			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 		{
-			log("Noooooooooo");
 			isAlive = false;
 			auto e = a->getTag() == Tags::SKATER ? a : b;
 			e->getNode()->removeFromParent();
 			//PhiTieuLayer::instance->matMau();
 		}
+	}
 	
-
-		//----------------   Va chạm với coin   ---------
-	
-			if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
-				|| (a->getTag() == Tags::COIN && b->getTag() == Tags::SKATER))
-			{
-				log("Yesssssss");
-				auto e = a->getTag() == Tags::COIN ? a : b;
-				e->getNode()->removeFromParent();
-				//PhiTieuLayer::instance->matMau();
-			
-			}
+	//Va cham voi ROAD
+	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::ROAD) || (a->getTag() == Tags::ROAD && b->getTag() == Tags::SKATER))
+	{
+		this->isJumping = false;
 	}
 
-	return false;
-}
+	//Va chạm với COIN
+	if ((a->getCategoryBitmask() & b->getCollisionBitmask()) == 0 || (b->getCategoryBitmask() & a->getCollisionBitmask()) == 0)
+	{
+		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+		{
+			if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
+			{
+				b->getNode()->removeFromParent();
+			}
+		}
 
+		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+		{
+			if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
+			{
+				a->getNode()->removeFromParent();
+			}
+		}
+	}
+
+	return true;
+}
