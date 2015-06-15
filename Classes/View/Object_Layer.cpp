@@ -27,7 +27,6 @@ bool Object_Layer::init()
 	skater->runAnimation_Run();
 	this->addChild(skater);
 
-
 	//Road
 	Node * road = Node::create();
 	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 10.5);
@@ -60,7 +59,7 @@ void Object_Layer::Spawn_Obstruction(float dt)
 {
 	auto obs = Obtruction::create("Obtruction/car1.png");
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/3.5));
+	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	this->addChild(obs);
 	auto moveObs = MoveBy::create(4, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	obs->runAction(moveObs);	

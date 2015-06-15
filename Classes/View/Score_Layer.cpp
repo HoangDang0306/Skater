@@ -37,11 +37,11 @@ bool Score_Layer::init()
 	this->addChild(current_Score);
 
 	//Current Score
-	current_Score = Label::create("0", "fonts/Kidfont.ttf", 45, Size::ZERO, TextHAlignment::LEFT, TextVAlignment::TOP);
-	current_Score->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
-	current_Score->setColor(Color3B::WHITE);
-	current_Score->setPosition(text_best_Score->getContentSize().width * 3 / 2, Config::screenSize.height - text_current_Score->getContentSize().height * 3 / 2.5);
-	this->addChild(current_Score);
+	best_Score = Label::create("0", "fonts/Kidfont.ttf", 45, Size::ZERO, TextHAlignment::LEFT, TextVAlignment::TOP);
+	best_Score->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
+	best_Score->setColor(Color3B::WHITE);
+	best_Score->setPosition(text_best_Score->getContentSize().width * 3 / 2, Config::screenSize.height - text_current_Score->getContentSize().height * 3 / 2.5);
+	this->addChild(best_Score);
 
 	//Sprite Coin
 	Sprite * sprite_Coin = Sprite::create("Coin/coin4.png");

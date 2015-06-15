@@ -32,6 +32,9 @@ public:
 	//Touch
 	bool onTouchBegan(Touch *touch, Event *unused_event);
 
+	//Back Button
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
+
 	//Update
 	void update(float dt);
 };

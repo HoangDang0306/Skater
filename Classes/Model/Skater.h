@@ -19,9 +19,11 @@ public:
 	Skater();
 	~Skater();
 	bool isAlive;
+	bool isDeath;
 	bool isJumping;
 	bool isContactWithObs;
 	int coin;
+	int score;
 	static Skater* create(string fileName);
 
 	void runAnimation(string name, int count, float time, bool isRepeat);
