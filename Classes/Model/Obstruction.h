@@ -18,6 +18,7 @@ public:
 	Obtruction();
 	~Obtruction();
 	static Obtruction* create(string fileName);
+	void runAnimation(string name, int count, float time, bool isRepeat);
 };
 
 

@@ -23,6 +23,7 @@ bool Obtruction::init(string fileName)
 	_sprite->setPosition(0, 0);
 	this->addChild(_sprite);
 
+	
 	//-------------   Physic Body  --------------
 	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
 	body->setDynamic(true);
@@ -31,6 +32,11 @@ bool Obtruction::init(string fileName)
 	body->setContactTestBitmask(1);
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
-	
+
 	return true;
+}
+//Animation
+void Obtruction::runAnimation(string name, int count, float time, bool isRepeat)
+{
+	XHelper::runAnimation(name, count, time, true, this->_sprite);
 }

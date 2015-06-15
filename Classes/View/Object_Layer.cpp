@@ -55,15 +55,36 @@ void Object_Layer::SetPhysicsWorld(PhysicsWorld * world)
 	this->physicsWorld = world;
 }
 
-
+	
 void Object_Layer::Spawn_Obstruction(float dt)
 {
-	auto obs = Obtruction::create("Obtruction/car1.png");
+
+
+	/*auto obs = Obtruction::create("0.png");
+	obs->setScale(0.7);
+	int k = cocos2d::random(1, 4);
+	switch (k)
+	{
+	case 1:
+	obs->runAnimation("dog", 4, 0.5f, true);
+	break;
+	case 2:
+	obs->runAnimation("chick", 4, 0.5f, true);
+	break;
+	case 3:
+	obs->runAnimation("cat", 4, 0.5f, true);
+	break;
+	case 4:
+	obs->runAnimation("hour", 4, 0.5f, true);
+	break;
+	}
+
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/3.5));
+	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/4.5));
 	this->addChild(obs);
-	auto moveObs = MoveBy::create(4, Vec2(-Config::screenSize.width * 3 / 2, 0));
-	obs->runAction(moveObs);	
+	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	obs->runAction(moveObs);	*/
+	
 }
 
 void Object_Layer::Spawn_Coin(float dt)
@@ -80,8 +101,9 @@ void Object_Layer::Spawn_Coin(float dt)
 		auto moveCoin = MoveBy::create(3, Vec2(-Config::screenSize.width * 3 / 2, 0));
 		coin->runAction(moveCoin);
 	}
-*/
-
+	*/
+	
+	
 	int min = 5.0;
 	int max = 10.0;
 	int rangeDuration = max - min;
@@ -100,17 +122,13 @@ void Object_Layer::Spawn_Coin(float dt)
 		{
 		case 1:
 			obs->runAnimation("coin", 7, 0.8f, true);
-			this->addChild(obs);
-			obs->runAction(moveObs);
 			break;
 		case 2: 
 			obs->runAnimation("coin2", 7, 0.8f, true); 
-			this->addChild(obs);
-			obs->runAction(moveObs);
 			break;
-	
 		}
-	
+		this->addChild(obs);
+		obs->runAction(moveObs);
 	}
-
+	
 }

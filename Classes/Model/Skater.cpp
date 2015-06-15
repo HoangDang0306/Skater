@@ -96,9 +96,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 		{
 			isAlive = false;
-			auto e = a->getTag() == Tags::SKATER ? a : b;
-			e->getNode()->removeFromParent();
-			//PhiTieuLayer::instance->matMau();
+			this->runAnimation_Fail();
 		}
 	}
 	
@@ -127,6 +125,5 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			}
 		}
 	}
-
 	return true;
 }
