@@ -10,7 +10,7 @@ void XHelper::runAnimation(string name, int count, float time, bool isRepeat, Sp
 	if (_sprite != nullptr)
 	{
 		_sprite->getActionManager()->removeAllActionsFromTarget(_sprite);
-		CCLOG(&name[0]);
+		//CCLOG(&name[0]);
 
 		SpriteFrameCache* cache = SpriteFrameCache::getInstance();
 		cache->addSpriteFramesWithFile(name + ".plist");
@@ -22,7 +22,7 @@ void XHelper::runAnimation(string name, int count, float time, bool isRepeat, Sp
 		for (int i = 1; i <= count; i++)
 		{
 			sprintf(frameName, "%s%d.png", &name[0], i);
-			CCLOG("framename : %s", frameName);
+			//CCLOG("framename : %s", frameName);
 			auto frame = cache->getSpriteFrameByName(frameName);
 			animation->addSpriteFrame(frame);
 		}

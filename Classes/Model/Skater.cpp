@@ -17,10 +17,12 @@ bool Skater::init(string fileName)
 {
 	if (!Node::init())
 		return false;
-	isAlive = true;
-	isJumping = false;
-	isContactWithObs = false;
-	//Skater::Instance = this;
+	this->isAlive = true;
+	this->isDeath = false;
+	this->isJumping = false;
+	this->isContactWithObs = false;
+	this->coin = 0;
+	this->score = 0;
 
 	//-------------  Khởi tạo sprite chính -------------
 	_sprite = Sprite::create(fileName);
@@ -30,7 +32,7 @@ bool Skater::init(string fileName)
 	//-------------   Physic Body  --------------
 	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2(0, 0));
 	body->setDynamic(true);
-	body->setMass(50.0f);
+	body->setMass(48.0f);
 	body->setAngularVelocityLimit(0.0f);
 	body->setRotationEnable(false);
 	body->setTag(Tags::SKATER);
@@ -90,14 +92,25 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	auto b = contact.getShapeB()->getBody();
 
 	//----------------   Va chạm vơi chướng ngại vật   ---------
-	if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
+		|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 	{
+<<<<<<< HEAD
 		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
 			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 		{
 			isAlive = false;
 			this->runAnimation_Fail();
 		}
+=======
+			this->isDeath = true;
+	}
+
+	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE)
+		|| (a->getTag() == Tags::MAIXE && b->getTag() == Tags::SKATER))
+	{
+		this->isJumping = false;
+>>>>>>> 664e331fdb443eb6227717c9e5104fced57e0746
 	}
 	
 	//Va cham voi ROAD
@@ -114,6 +127,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
 			{
 				b->getNode()->removeFromParent();
+				this->coin++;
 			}
 		}
 
@@ -122,7 +136,13 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
 			{
 				a->getNode()->removeFromParent();
+				this->coin++;
 			}
+		}
+
+		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::NODE_SCORE) || (b->getTag() == Tags::SKATER && a->getTag() == Tags::NODE_SCORE))
+		{
+			this->score++;
 		}
 	}
 	return true;

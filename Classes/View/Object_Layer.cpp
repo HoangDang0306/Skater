@@ -27,7 +27,6 @@ bool Object_Layer::init()
 	skater->runAnimation_Run();
 	this->addChild(skater);
 
-
 	//Road
 	Node * road = Node::create();
 	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 10.5);
@@ -80,7 +79,11 @@ void Object_Layer::Spawn_Obstruction(float dt)
 	}
 
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+<<<<<<< HEAD
 	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height/4.5));
+=======
+	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
+>>>>>>> 664e331fdb443eb6227717c9e5104fced57e0746
 	this->addChild(obs);
 	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	obs->runAction(moveObs);	*/
@@ -89,6 +92,7 @@ void Object_Layer::Spawn_Obstruction(float dt)
 
 void Object_Layer::Spawn_Coin(float dt)
 {
+<<<<<<< HEAD
 
 	/*
 	int random_SoLuong = cocos2d::random(3, 7);
@@ -104,6 +108,8 @@ void Object_Layer::Spawn_Coin(float dt)
 	*/
 	
 	
+=======
+>>>>>>> 664e331fdb443eb6227717c9e5104fced57e0746
 	int min = 5.0;
 	int max = 10.0;
 	int rangeDuration = max - min;
@@ -127,8 +133,12 @@ void Object_Layer::Spawn_Coin(float dt)
 			obs->runAnimation("coin2", 7, 0.8f, true); 
 			break;
 		}
+<<<<<<< HEAD
 		this->addChild(obs);
 		obs->runAction(moveObs);
 	}
 	
+=======
+	}
+>>>>>>> 664e331fdb443eb6227717c9e5104fced57e0746
 }

@@ -29,8 +29,10 @@ public:
 			return "COIN_SKATER_CATEGORY";
 		case Tags::ROAD:
 			return "ROAD";
-		case Tags::ITEM:
-			return "ITEM";
+		case Tags::MAIXE:
+			return "MAIXE";
+		case Tags::NODE_SCORE:
+			return "NODE_SCORE";
 		default:
 			break;
 
@@ -43,7 +45,8 @@ public:
 	static const int COIN_SKATER_COLLISION = 15;
 	static const int COIN_SKATER_CATEGORY = 16;
 	static const int ROAD = 17;
-	static const int ITEM = 18;
+	static const int MAIXE = 18;
+	static const int NODE_SCORE = 19;
 	Tags();
 	~Tags();
 };
