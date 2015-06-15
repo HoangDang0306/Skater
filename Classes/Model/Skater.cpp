@@ -95,14 +95,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
 		|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 	{
-<<<<<<< HEAD
-		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
-			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
-		{
-			isAlive = false;
-			this->runAnimation_Fail();
-		}
-=======
+
 			this->isDeath = true;
 	}
 
@@ -110,7 +103,6 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 		|| (a->getTag() == Tags::MAIXE && b->getTag() == Tags::SKATER))
 	{
 		this->isJumping = false;
->>>>>>> 664e331fdb443eb6227717c9e5104fced57e0746
 	}
 	
 	//Va cham voi ROAD

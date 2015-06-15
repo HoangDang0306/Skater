@@ -35,8 +35,7 @@ bool Obtruction::init(string fileName)
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
 
-<<<<<<< HEAD
-=======
+
 	//Mai xe
 	auto nodeCar = Node::create();
 	nodeCar->setPosition(_sprite->getContentSize().width * 2.1 / 4, _sprite->getContentSize().height * 2.3 / 3);
@@ -62,7 +61,7 @@ bool Obtruction::init(string fileName)
 	bodyNodeScore->setCollisionBitmask(0x02);
 	nodeScore->setPhysicsBody(bodyNodeScore);
 	
->>>>>>> 664e331fdb443eb6227717c9e5104fced57e0746
+
 	return true;
 }
 //Animation
