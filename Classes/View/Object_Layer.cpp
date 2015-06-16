@@ -58,12 +58,14 @@ void Object_Layer::SetPhysicsWorld(PhysicsWorld * world)
 	
 void Object_Layer::Spawn_Obstruction(float dt)
 {
+	
 	auto obs = Obtruction::create("Obtruction/car1.png");
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	this->addChild(obs);
 	auto moveObs = MoveBy::create(3.5, Vec2(-Config::screenSize.width * 3 / 2, 0));
-	obs->runAction(moveObs);	
+	obs->runAction(moveObs);
+	
 }
 
 void Object_Layer::Spawn_Animal(float dt)
