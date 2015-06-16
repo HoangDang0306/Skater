@@ -35,8 +35,9 @@ bool GamePlay::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 
-	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), cocos2d::random(2, 5));
-	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), cocos2d::random(5, 10));
+	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 10);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 6);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
 	this->scheduleUpdate();
 
 	return true;
@@ -85,20 +86,6 @@ void GamePlay::Set_Score_Layer(Score_Layer * layer)
 
 void GamePlay::update(float dt)
 {
-	if (object_Layer->skater->isAlive == false)
-	{
-		/*
-		CCLOG("Game over");
-		background_Layer->speed_Scroll = 0;
-		this->unschedule(schedule_selector(Object_Layer::Spawn_Obstruction));
-		this->unschedule(schedule_selector(Object_Layer::Spawn_Coin));
-		object_Layer->stopAllActionsByTag(Tags::COIN);
-		object_Layer->stopAllActionsByTag(Tags::OBSTRUCTION);
-		*/
-		//Director::getInstance()->replaceScene(TransitionFade::create(0.5, Gameover_Scene::create_Gameover_Scene(), Color3B::WHITE));
-
-	}
-
 	if (object_Layer->skater->isDeath == true)
 	{
 		//Dừng sinh Oject và cuộn background

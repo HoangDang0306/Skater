@@ -3,6 +3,7 @@
 #include "Utility/Tags.h"
 #include "Model/Skater.h"
 #include "Model/Coin.h"
+#include "Model/Obstruction.h"
 #include "Model/Obstruction_Animal.h"
 #include "Model/Coin.h"
 #include <iostream>
