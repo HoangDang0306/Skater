@@ -21,6 +21,9 @@ bool GamePlay::init()
 {
 	if (!Layer::init()) return false;
 	
+	//Best Score
+	bestScore = 0;
+
 	//Back button
 	this->setKeypadEnabled(true);
 	this->setKeyboardEnabled(true);
@@ -83,10 +86,19 @@ void GamePlay::update(float dt)
 	
 	if (object_Layer->skater->isDeath == true)
 	{
+		//Dừng sinh Oject và cuộn background
 		background_Layer->speed_Scroll = 0;
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Obstruction));
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Coin));
 		
+		//Lưu Highscore
+		bestScore = UserDefault::getInstance()->getIntegerForKey("BESTSCORE");
+		if (this->object_Layer->skater->score > bestScore)
+		{
+			UserDefault::getInstance()->setIntegerForKey("BESTSCORE", this->object_Layer->skater->score);
+		}
+
+		//Chuyển scene
 		auto endScene = End_Scene::create_End_Scene(this->object_Layer->skater->score);
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5, endScene));
 	}

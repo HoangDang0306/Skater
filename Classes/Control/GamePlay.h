@@ -14,6 +14,9 @@ public:
 	bool init();
 	static GamePlay * createGamePlayLayer();
 
+	//Store Data
+	int bestScore;
+
 	//Object
 	Object_Layer * object_Layer;
 	void Set_Object_Layer(Object_Layer * layer);

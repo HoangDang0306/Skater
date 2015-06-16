@@ -5,9 +5,9 @@
 #include "Model/Coin.h"
 #include "Model/Obstruction.h"
 #include "Model/Coin.h"
-USING_NS_CC;
 #include <iostream>
 using namespace std;
+USING_NS_CC;
 Object_Layer::Object_Layer()
 {
 }
@@ -61,7 +61,7 @@ void Object_Layer::Spawn_Obstruction(float dt)
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	this->addChild(obs);
-	auto moveObs = MoveBy::create(4, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	auto moveObs = MoveBy::create(3.5, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	obs->runAction(moveObs);	
 }
 

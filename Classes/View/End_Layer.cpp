@@ -1,7 +1,10 @@
 #include "End_Layer.h"
 #include "Utility/Config.h"
+#include "ui/CocosGUI.h"
+#include "View/Play_Scene.h"
 #include <sstream>
 using namespace std;
+using namespace ui;
 
 End_Layer::End_Layer()
 {
@@ -15,6 +18,30 @@ End_Layer::~End_Layer()
 bool End_Layer::init(int score)
 {
 	if (!Layer::init()) return false;
+
+	//Background
+	auto background = Sprite::create("BackgroundEnd.jpg");
+	background->setPosition(Config::centerPoint);
+	background->setScale(Config::getScale(background));
+	this->addChild(background, 0);
+
+	//Replay Button
+	Button * replay_Button = Button::create("Button/ReplayButton.png", "Button/ReplayButton.png", "Button/ReplayButton.png");
+	replay_Button->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	replay_Button->setPosition(Config::centerPoint);
+	replay_Button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			Director::getInstance()->replaceScene(TransitionFade::create(0.5, Play_Scene::create_Play_Scene(), Color3B::WHITE));
+			break;
+		default:
+			break;
+		}
+	});
+	this->addChild(replay_Button, 1);
 
 	//Text current Score
 	Label * text_current_Score = Label::create("Score:", "fonts/Kidfont.ttf", 45, Size::ZERO, TextHAlignment::LEFT, TextVAlignment::TOP);
