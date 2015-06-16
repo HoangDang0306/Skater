@@ -25,6 +25,7 @@ bool Obtruction::init(string fileName)
 	_sprite->setAnchorPoint(Vec2(0.25, 0.25));
 	this->addChild(_sprite);
 
+	
 	//-------------   Physic Body  --------------
 	body = PhysicsBody::createBox(Size(_sprite->getContentSize().width / 2, _sprite->getContentSize().height / 2), PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
 	body->setDynamic(false);
@@ -33,6 +34,7 @@ bool Obtruction::init(string fileName)
 	body->setContactTestBitmask(1);
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
+
 
 	//Mai xe
 	auto nodeCar = Node::create();
@@ -59,5 +61,11 @@ bool Obtruction::init(string fileName)
 	bodyNodeScore->setCollisionBitmask(0x02);
 	nodeScore->setPhysicsBody(bodyNodeScore);
 	
+
 	return true;
+}
+//Animation
+void Obtruction::runAnimation(string name, int count, float time, bool isRepeat)
+{
+	XHelper::runAnimation(name, count, time, true, this->_sprite);
 }

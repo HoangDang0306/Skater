@@ -95,6 +95,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
 		|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
 	{
+
 			this->isDeath = true;
 	}
 
@@ -136,6 +137,5 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			this->score++;
 		}
 	}
-
 	return true;
 }

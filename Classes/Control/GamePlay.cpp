@@ -2,6 +2,7 @@
 #include "Model/Skater.h"
 #include "View/Object_Layer.h"
 #include "Model/Obstruction.h"
+#include "Utility/Tags.h"
 #include "View/Start_Scene.h"
 #include "View/End_Scene.h"
 #include <sstream>
@@ -33,8 +34,9 @@ bool GamePlay::init()
 	touchListener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
-	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 2);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 5);
+
+	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), cocos2d::random(2, 5));
+	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), cocos2d::random(5, 10));
 	this->scheduleUpdate();
 
 	return true;
@@ -83,7 +85,20 @@ void GamePlay::Set_Score_Layer(Score_Layer * layer)
 
 void GamePlay::update(float dt)
 {
-	
+	if (object_Layer->skater->isAlive == false)
+	{
+		/*
+		CCLOG("Game over");
+		background_Layer->speed_Scroll = 0;
+		this->unschedule(schedule_selector(Object_Layer::Spawn_Obstruction));
+		this->unschedule(schedule_selector(Object_Layer::Spawn_Coin));
+		object_Layer->stopAllActionsByTag(Tags::COIN);
+		object_Layer->stopAllActionsByTag(Tags::OBSTRUCTION);
+		*/
+		//Director::getInstance()->replaceScene(TransitionFade::create(0.5, Gameover_Scene::create_Gameover_Scene(), Color3B::WHITE));
+
+	}
+
 	if (object_Layer->skater->isDeath == true)
 	{
 		//Dừng sinh Oject và cuộn background
@@ -101,6 +116,7 @@ void GamePlay::update(float dt)
 		//Chuyển scene
 		auto endScene = End_Scene::create_End_Scene(this->object_Layer->skater->score);
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5, endScene));
+
 	}
 
 	//Coin

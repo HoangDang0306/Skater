@@ -18,6 +18,7 @@ public:
 	Skater * skater;
 	void Spawn_Obstruction(float dt);
 	void Spawn_Coin(float dt);
+	void Spawn_Animal(float dt);
 
 	//Physics
 	PhysicsWorld * physicsWorld;
