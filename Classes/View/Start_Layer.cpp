@@ -2,6 +2,7 @@
 #include "View/Play_Scene.h"
 #include "Utility/Config.h"
 #include "ui/CocosGUI.h"
+#include "Model/Skater.h"
 using namespace ui;
 
 Start_Layer::Start_Layer()
@@ -16,6 +17,20 @@ bool Start_Layer::init()
 {
 	if (!Layer::init()) return false;
 
+	//Background
+	auto background = Sprite::create("Background/Background_4.jpg");
+	background->setPosition(Config::centerPoint);
+	background->setScale(Config::getScale(background));
+	this->addChild(background, 0);
+
+	//SkaterKid
+	Skater * skater = Skater::create("0.png");
+	skater->setScale(1.2);
+	skater->runAnimation_Run();
+	skater->setPosition(Config::centerPoint.x - 250, Config::centerPoint.y - 155);
+	this->addChild(skater);
+
+	//Button
 	Button * play_Button = Button::create("Button/play.png", "Button/play.png", "Button/play.png");
 	play_Button->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	play_Button->setPosition(Config::centerPoint);
