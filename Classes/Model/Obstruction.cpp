@@ -3,13 +3,18 @@
 #include "Utility/Tags.h"
 #include "Utility/Config.h"
 
-Obtruction::Obtruction(){}
+Obtruction::Obtruction()
+{
+	this->speed_Obs = 6.0f;
+}
+
 Obtruction::~Obtruction(){}
 
 Obtruction* Obtruction::create(string fileName)
 {
 	Obtruction* obtruction = new Obtruction();
 	obtruction->init(fileName);
+//	obtruction->MoveObs(this->speed_Obs);
 	obtruction->autorelease();
 	return obtruction;
 }
@@ -50,7 +55,7 @@ bool Obtruction::init(string fileName)
 
 	//Score
 	auto nodeScore = Node::create();
-	nodeScore->setPosition(_sprite->getContentSize().width * 2.1 / 4, _sprite->getContentSize().height * 2.3 / 3);
+	nodeScore->setPosition(_sprite->getContentSize().width * 2.1 / 4, _sprite->getContentSize().height);
 	nodeScore->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	_sprite->addChild(nodeScore);
 	PhysicsBody * bodyNodeScore = PhysicsBody::createBox(Size(_sprite->getContentSize().width * 2.5 / 5, Config::screenSize.height), PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
@@ -60,7 +65,6 @@ bool Obtruction::init(string fileName)
 	bodyNodeScore->setContactTestBitmask(1);
 	bodyNodeScore->setCollisionBitmask(0x02);
 	nodeScore->setPhysicsBody(bodyNodeScore);
-	
 
 	return true;
 }
@@ -68,4 +72,10 @@ bool Obtruction::init(string fileName)
 void Obtruction::runAnimation(string name, int count, float time, bool isRepeat)
 {
 	XHelper::runAnimation(name, count, time, true, this->_sprite);
+}
+
+void Obtruction::MoveObs(float speed, float distance)
+{
+	auto moveObs = MoveTo::create(speed, Vec2(-(distance + 2)*Config::screenSize.width, 0));
+	this->runAction(moveObs);
 }

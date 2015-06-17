@@ -14,11 +14,17 @@ public:
 	static Object_Layer * create_Object_Layer();
 	bool init();
 
+	//Kiểm tra điều kiện sinh obs
+//	bool sinhCar;
+//	bool sinhAni;
+//	bool sinhCoin;
+
 	//Object
 	Skater * skater;
 	void Spawn_Obstruction(float dt);
 	void Spawn_Coin(float dt);
 	void Spawn_Animal(float dt);
+	float speed_Obs;
 
 	//Physics
 	PhysicsWorld * physicsWorld;

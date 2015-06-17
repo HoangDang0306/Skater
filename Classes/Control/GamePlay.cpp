@@ -21,7 +21,7 @@ GamePlay::~GamePlay()
 bool GamePlay::init()
 {
 	if (!Layer::init()) return false;
-	
+
 	//Best Score
 	bestScore = 0;
 
@@ -35,8 +35,8 @@ bool GamePlay::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 
-	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 10);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 6);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 8);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 12);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
 	this->scheduleUpdate();
 
@@ -92,6 +92,7 @@ void GamePlay::update(float dt)
 		background_Layer->speed_Scroll = 0;
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Obstruction));
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Coin));
+		this->unschedule(schedule_selector(Object_Layer::Spawn_Animal));
 		
 		//Lưu Highscore
 		bestScore = UserDefault::getInstance()->getIntegerForKey("BESTSCORE");
@@ -103,7 +104,14 @@ void GamePlay::update(float dt)
 		//Chuyển scene
 		auto endScene = End_Scene::create_End_Scene(this->object_Layer->skater->score);
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5, endScene));
+	}
 
+
+	//Tăng speed cuộn background và speed di chuyển của Obs
+	if ((this->object_Layer->skater->score % 10) == 0 && this->object_Layer->skater->isIncrease == false)
+	{
+		background_Layer->speed_Scroll += 75;
+		this->object_Layer->skater->isIncrease = true;
 	}
 
 	//Coin

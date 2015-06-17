@@ -11,6 +11,8 @@ using namespace std;
 USING_NS_CC;
 Object_Layer::Object_Layer()
 {
+	//Speed
+	speed_Obs = 3.5f;
 }
 
 
@@ -21,6 +23,11 @@ Object_Layer::~Object_Layer()
 bool Object_Layer::init()
 {
 	if (!Layer::init()) return false;
+
+	//Điều kiện sinh
+//	sinhCar = true;
+//	sinhCoin = true;
+//	sinhAni = true;
 
 	//SkaterKid
 	skater = Skater::create("0.png");
@@ -39,6 +46,7 @@ bool Object_Layer::init()
 	body_Road->setCollisionBitmask(1);
 	road->setPhysicsBody(body_Road);
 	this->addChild(road);
+
 	return true;
 }
 
@@ -58,39 +66,39 @@ void Object_Layer::SetPhysicsWorld(PhysicsWorld * world)
 	
 void Object_Layer::Spawn_Obstruction(float dt)
 {
-	auto obs = Obtruction::create("Obtruction/car1.png");
+	Obtruction * obs = Obtruction::create("Obtruction/car1.png");
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
+	auto randomDis = random(0.5, 2.0);
+	obs->MoveObs(randomDis*5, randomDis);
+	obs->setPosition(Point(Config::screenSize.width + randomDis*Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	this->addChild(obs);
-	auto moveObs = MoveBy::create(3.5, Vec2(-Config::screenSize.width * 3 / 2, 0));
-	obs->runAction(moveObs);	
 }
 
 void Object_Layer::Spawn_Animal(float dt)
 {
-	auto obs = Obstruction_Animal::create("0.png");
-	obs->setScale(0.7);
+	auto ani = Obstruction_Animal::create("0.png");
+	ani->setScale(0.7);
 	int k = cocos2d::random(1, 4);
 	switch (k)
 	{
 	case 1:
-		obs->runAnimation("dog", 4, 0.5f, true);
+		ani->runAnimation("dog", 4, 0.5f, true);
 		break;
 	case 2:
-		obs->runAnimation("chick", 4, 0.5f, true);
+		ani->runAnimation("chick", 4, 0.5f, true);
 		break;
 	case 3:
-		obs->runAnimation("cat", 4, 0.5f, true);
+		ani->runAnimation("cat", 4, 0.5f, true);
 		break;
 	case 4:
-		obs->runAnimation("hour", 4, 0.5f, true);
+		ani->runAnimation("hour", 4, 0.5f, true);
 		break;
 	}
-	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
-	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
-	this->addChild(obs);
-	obs->runAction(moveObs);
+	ani->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	ani->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
+	auto moveAni = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	this->addChild(ani);
+	ani->runAction(moveAni);
 }
 
 void Object_Layer::Spawn_Coin(float dt)

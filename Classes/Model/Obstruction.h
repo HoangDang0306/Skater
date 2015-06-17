@@ -18,6 +18,8 @@ public:
 	Obtruction();
 	~Obtruction();
 	static Obtruction* create(string fileName);
+	float speed_Obs;
+	void MoveObs(float speed, float distance);
 	void runAnimation(string name, int count, float time, bool isRepeat);
 };
 

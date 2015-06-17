@@ -20,7 +20,7 @@ bool Skater::init(string fileName)
 	this->isAlive = true;
 	this->isDeath = false;
 	this->isJumping = false;
-	this->isContactWithObs = false;
+	this->isIncrease = false;
 	this->coin = 0;
 	this->score = 0;
 
@@ -135,6 +135,7 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::NODE_SCORE) || (b->getTag() == Tags::SKATER && a->getTag() == Tags::NODE_SCORE))
 		{
 			this->score++;
+			this->isIncrease = false;
 		}
 	}
 	return true;
