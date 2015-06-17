@@ -25,7 +25,8 @@ bool Obstruction_Animal::init(string fileName)
 
 
 	//-------------   Physic Body  --------------
-	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
+	//body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
+	body = PhysicsBody::createCircle(_sprite->getContentSize().width / 2, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
 	body->setGravityEnable(false);
 	body->setDynamic(false);
 	body->setTag(Tags::OBSTRUCTION);

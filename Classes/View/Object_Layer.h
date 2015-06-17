@@ -19,6 +19,7 @@ public:
 	void Spawn_Obstruction(float dt);
 	void Spawn_Coin(float dt);
 	void Spawn_Animal(float dt);
+	void Spawn_Obstruction2(float dt);
 
 	//Physics
 	PhysicsWorld * physicsWorld;

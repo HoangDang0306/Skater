@@ -65,6 +65,7 @@ void Object_Layer::Spawn_Obstruction(float dt)
 	this->addChild(obs);
 	auto moveObs = MoveBy::create(3.5, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	obs->runAction(moveObs);
+
 	
 }
 
@@ -72,7 +73,7 @@ void Object_Layer::Spawn_Animal(float dt)
 {
 	auto obs = Obstruction_Animal::create("0.png");
 	obs->setScale(0.7);
-	int k = cocos2d::random(1, 4);
+	int k = cocos2d::random(1, 3);
 	switch (k)
 	{
 	case 1:
@@ -84,13 +85,13 @@ void Object_Layer::Spawn_Animal(float dt)
 	case 3:
 		obs->runAnimation("cat", 4, 0.5f, true);
 		break;
-	case 4:
-		obs->runAnimation("hour", 4, 0.5f, true);
-		break;
+		/*case 4:
+			obs->runAnimation("hour", 4, 0.5f, true);
+			break;*/
 	}
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	obs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
-	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	obs->setPosition(Point(Config::screenSize.width-50, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
+	auto moveObs = MoveBy::create(5.5, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	this->addChild(obs);
 	obs->runAction(moveObs);
 }
@@ -121,9 +122,18 @@ void Object_Layer::Spawn_Coin(float dt)
 			obs->runAnimation("coin2", 7, 0.8f, true); 
 			break;
 		}
-
 		this->addChild(obs);
 		obs->runAction(moveObs);
 	}
-	
+}
+void Object_Layer::Spawn_Obstruction2(float dt)
+{
+	std::vector<std::string> _spriteNames = { "Obtruction/1.png", "Obtruction/2.png", "Obtruction/3.png", "Obtruction/4.png", "Obtruction/5.png" };
+	int k = cocos2d::random(0, 4);
+	auto foo = Obstruction_Animal::create(_spriteNames.at(k));
+	foo->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
+	foo->setScale(0.6);
+	addChild(foo, 1);
+	auto moveObs = MoveBy::create(7, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	foo->runAction(moveObs);
 }

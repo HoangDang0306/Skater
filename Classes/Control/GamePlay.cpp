@@ -35,9 +35,10 @@ bool GamePlay::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 
-	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 10);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 9);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 6);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
 	this->scheduleUpdate();
 
 	return true;
