@@ -6,6 +6,7 @@ Sprite* _evenBackground;
 
 Background_Layer::Background_Layer()
 {
+	speed_Scroll = 100;
 }
 
 
@@ -17,7 +18,6 @@ bool Background_Layer::init()
 {
 	if (!Layer::init()) return false;
 
-	speed_Scroll = 100;
 	endlessBackground();
 	return true;
 }

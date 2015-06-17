@@ -1,7 +1,7 @@
 ﻿#include "Skater.h"
 #include "Utility/XHelper.h"
 #include "Utility/Tags.h"
-
+#include "SimpleAudioEngine.h"
 Skater::Skater(){}
 Skater::~Skater(){}
 
@@ -20,7 +20,7 @@ bool Skater::init(string fileName)
 	this->isAlive = true;
 	this->isDeath = false;
 	this->isJumping = false;
-	this->isContactWithObs = false;
+	this->isIncrease = false;
 	this->coin = 0;
 	this->score = 0;
 
@@ -84,6 +84,9 @@ void Skater::jump_Action()
 		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
 		nullptr));
 
+	//tạo music
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Jump11.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Jump11.wav");
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
@@ -120,6 +123,9 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			{
 				b->getNode()->removeFromParent();
 				this->coin++;
+
+				CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Pickup_Coin3.wav");
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
 			}
 		}
 
@@ -129,12 +135,16 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			{
 				a->getNode()->removeFromParent();
 				this->coin++;
+
+				CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Pickup_Coin3.wav");
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
 			}
 		}
 
 		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::NODE_SCORE) || (b->getTag() == Tags::SKATER && a->getTag() == Tags::NODE_SCORE))
 		{
 			this->score++;
+			this->isIncrease = false;
 		}
 	}
 	return true;

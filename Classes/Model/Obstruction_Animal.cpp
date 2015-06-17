@@ -1,5 +1,6 @@
 ﻿#include "Obstruction_Animal.h"
 #include "Utility/Tags.h"
+#include "Utility/Config.h"
 #include "Utility/XHelper.h"
 
 Obstruction_Animal::Obstruction_Animal(){}
@@ -35,6 +36,19 @@ bool Obstruction_Animal::init(string fileName)
 	body->setCategoryBitmask(0x01);
 	this->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->setPhysicsBody(body);
+
+	//Score
+	auto nodeScore = Node::create();
+	nodeScore->setPosition(_sprite->getContentSize().width * 2.1 / 4, Config::screenSize.height/2 /*_sprite->getContentSize().height * 2.3 / 3*/);
+	nodeScore->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	_sprite->addChild(nodeScore);
+	PhysicsBody * bodyNodeScore = PhysicsBody::createBox(Size(_sprite->getContentSize().width * 2.5 / 5, Config::screenSize.height), PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
+	bodyNodeScore->setTag(Tags::NODE_SCORE);
+	bodyNodeScore->setDynamic(false);
+	bodyNodeScore->setCategoryBitmask(0x01);
+	bodyNodeScore->setContactTestBitmask(1);
+	bodyNodeScore->setCollisionBitmask(0x02);
+	nodeScore->setPhysicsBody(bodyNodeScore);
 
 	return true;
 }

@@ -21,7 +21,7 @@ public:
 	bool isAlive;
 	bool isDeath;
 	bool isJumping;
-	bool isContactWithObs;
+	bool isIncrease;
 	int coin;
 	int score;
 	static Skater* create(string fileName);

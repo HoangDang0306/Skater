@@ -29,9 +29,6 @@ public:
 	Score_Layer * score_Layer;
 	void Set_Score_Layer(Score_Layer * layer);
 
-	//Obstruction
-	//void Spawn_Obstruction(float dt);
-
 	//Touch
 	bool onTouchBegan(Touch *touch, Event *unused_event);
 
