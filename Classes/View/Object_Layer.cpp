@@ -24,11 +24,6 @@ bool Object_Layer::init()
 {
 	if (!Layer::init()) return false;
 
-	//Điều kiện sinh
-//	sinhCar = true;
-//	sinhCoin = true;
-//	sinhAni = true;
-
 	//SkaterKid
 	skater = Skater::create("0.png");
 	skater->setPosition(Config::centerPoint.x-250, Config::centerPoint.y-150);
@@ -66,7 +61,10 @@ void Object_Layer::SetPhysicsWorld(PhysicsWorld * world)
 	
 void Object_Layer::Spawn_Obstruction(float dt)
 {
-	Obtruction * obs = Obtruction::create("Obtruction/car1.png");
+	int i = random(1, 3);
+	char name[100];
+	sprintf(name, "Obtruction/car%i.png", i);
+	Obtruction * obs = Obtruction::create(name);
 	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	auto randomDis = random(0.5, 2.0);
 	obs->MoveObs(randomDis*5, randomDis);
