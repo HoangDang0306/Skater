@@ -1,7 +1,7 @@
 ﻿#include "GamePlay.h"
 #include "Model/Skater.h"
 #include "View/Object_Layer.h"
-#include "Model/Obstruction.h"
+#include "Model/Car.h"
 #include "Utility/Tags.h"
 #include "View/Start_Scene.h"
 #include "View/End_Scene.h"
@@ -37,11 +37,18 @@ bool GamePlay::init()
 
 
 
+<<<<<<< HEAD
 	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction), 8);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 12);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
+=======
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
+>>>>>>> 2bd95de77c0480dc057a250af6a6f87932fb155f
 	this->scheduleUpdate();
 
 	return true;
@@ -96,7 +103,7 @@ void GamePlay::update(float dt)
 	{
 		//Dừng sinh Oject và cuộn background
 		background_Layer->speed_Scroll = 0;
-		this->unschedule(schedule_selector(Object_Layer::Spawn_Obstruction));
+		this->unschedule(schedule_selector(Object_Layer::Spawn_Car));
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Coin));
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Animal));
 		
@@ -117,6 +124,8 @@ void GamePlay::update(float dt)
 	if ((this->object_Layer->skater->score % 10) == 0 && this->object_Layer->skater->isIncrease == false)
 	{
 		background_Layer->speed_Scroll += 75;
+		object_Layer->spawnObs->speed_Animal +=5;
+		object_Layer->spawnObs->speed_Car +=5;
 		this->object_Layer->skater->isIncrease = true;
 	}
 

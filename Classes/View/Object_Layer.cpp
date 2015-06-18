@@ -3,8 +3,8 @@
 #include "Utility/Tags.h"
 #include "Model/Skater.h"
 #include "Model/Coin.h"
-#include "Model/Obstruction.h"
-#include "Model/Obstruction_Animal.h"
+#include "Model/Car.h"
+#include "Model/Animal.h"
 #include "Model/Coin.h"
 #include "Model/Bonusx2.h"
 #include "SimpleAudioEngine.h"
@@ -26,11 +26,6 @@ bool Object_Layer::init()
 {
 	if (!Layer::init()) return false;
 
-	//Điều kiện sinh
-//	sinhCar = true;
-//	sinhCoin = true;
-//	sinhAni = true;
-
 	//SkaterKid
 	skater = Skater::create("0.png");
 	skater->setPosition(Config::centerPoint.x-250, Config::centerPoint.y-150);
@@ -49,6 +44,13 @@ bool Object_Layer::init()
 	road->setPhysicsBody(body_Road);
 	this->addChild(road);
 
+	//Spawn
+	spawnObs = SpawnObs::createSpawnObs();
+	spawnObs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
+	spawnObs->SinhCar();
+	spawnObs->SinhAni();
+	this->addChild(spawnObs);
+
 	return true;
 }
 
@@ -65,27 +67,32 @@ void Object_Layer::SetPhysicsWorld(PhysicsWorld * world)
 	this->physicsWorld = world;
 }
 
-	
-void Object_Layer::Spawn_Obstruction(float dt)
+void Object_Layer::Spawn_Car(float dt)
 {
-	std::vector<std::string> _spriteNames = { "Obtruction/car1.png", "Obtruction/car2.png", "Obtruction/car3.png" };
-	int k = cocos2d::random(0, 2);
-	Obtruction * obs = Obtruction::create(_spriteNames.at(k));
-	//Obtruction * obs = Obtruction::create("Obtruction/car1.png");
-	obs->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	int i = random(1, 3);
+	char name[100];
+	sprintf(name, "Obtruction/car%i.png", i);
+	Car * car = Car::create(name);
+	car->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	auto randomDis = random(0.5, 2.0);
+<<<<<<< HEAD
 	obs->MoveObs(randomDis*5, randomDis);
 	obs->setPosition(Point(Config::screenSize.width + randomDis*Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	this->addChild(obs);
 
 	//tạo music
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/bus.mp3");
+=======
+	car->MoveCar(randomDis*5, randomDis);
+	car->setPosition(Point(Config::screenSize.width + randomDis*Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
+	this->addChild(car);
+>>>>>>> 2bd95de77c0480dc057a250af6a6f87932fb155f
 }
 
 void Object_Layer::Spawn_Animal(float dt)
 {
 
-	auto ani = Obstruction_Animal::create("0.png");
+	Animal * ani = Animal::create("0.png");
 	ani->setScale(0.7);
 	int k = cocos2d::random(1, 4);
 	switch (k)
@@ -114,8 +121,8 @@ void Object_Layer::Spawn_Animal(float dt)
 void Object_Layer::Spawn_Coin(float dt)
 {
 
-	int min = 5.0;
-	int max = 10.0;
+	int min = 1.0;
+	int max = 8.0;
 	int rangeDuration = max - min;
 	int randomDuration = (rand() % rangeDuration) + min;
 
@@ -141,11 +148,12 @@ void Object_Layer::Spawn_Coin(float dt)
 		obs->runAction(moveObs);
 	}
 }
+
 void Object_Layer::Spawn_Obstruction2(float dt)
 {
 	std::vector<std::string> _spriteNames = { "Obtruction/1.png", "Obtruction/2.png", "Obtruction/3.png", "Obtruction/4.png", "Obtruction/5.png" };
 	int k = cocos2d::random(0, 4);
-	auto foo = Obstruction_Animal::create(_spriteNames.at(k));
+	auto foo = Animal::create(_spriteNames.at(k));
 	foo->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	foo->setScale(0.6);
 	addChild(foo, 1);
