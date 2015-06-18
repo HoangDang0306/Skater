@@ -21,6 +21,7 @@ bool Skater::init(string fileName)
 	this->isDeath = false;
 	this->isJumping = false;
 	this->isIncrease = false;
+	this->bonusX2 = false;
 	this->coin = 0;
 	this->score = 0;
 

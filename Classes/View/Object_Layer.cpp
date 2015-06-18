@@ -75,18 +75,12 @@ void Object_Layer::Spawn_Car(float dt)
 	Car * car = Car::create(name);
 	car->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	auto randomDis = random(0.5, 2.0);
-<<<<<<< HEAD
-	obs->MoveObs(randomDis*5, randomDis);
-	obs->setPosition(Point(Config::screenSize.width + randomDis*Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
-	this->addChild(obs);
-
-	//tạo music
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/bus.mp3");
-=======
 	car->MoveCar(randomDis*5, randomDis);
 	car->setPosition(Point(Config::screenSize.width + randomDis*Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	this->addChild(car);
->>>>>>> 2bd95de77c0480dc057a250af6a6f87932fb155f
+
+	//tạo music
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/bus.mp3");
 }
 
 void Object_Layer::Spawn_Animal(float dt)
@@ -169,4 +163,10 @@ void Object_Layer::Spawn_Bonusx2(float dt)
 	addChild(bonus, 1);
 	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	bonus->runAction(moveObs);
+
+	////cho 10s 
+	this->runAction(Sequence::create(
+		DelayTime::create(10),
+		nullptr));
+	skater->bonusX2 = false;
 }
