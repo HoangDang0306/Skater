@@ -4,7 +4,7 @@
 <dict>
 	<key>frames</key>
 	<dict>
-		<key>down1.png</key>
+		<key>between_up_and_down1.png</key>
 		<dict>
 			<key>frame</key>
 			<string>{{0,158},{76,79}}</string>
@@ -17,7 +17,7 @@
 			<key>sourceSize</key>
 			<string>{76,79}</string>
 		</dict>
-		<key>down2.png</key>
+		<key>between_up_and_down2.png</key>
 		<dict>
 			<key>frame</key>
 			<string>{{0,0},{78,79}}</string>
@@ -30,7 +30,7 @@
 			<key>sourceSize</key>
 			<string>{78,79}</string>
 		</dict>
-		<key>down3.png</key>
+		<key>between_up_and_down3.png</key>
 		<dict>
 			<key>frame</key>
 			<string>{{0,79},{78,79}}</string>
@@ -43,7 +43,7 @@
 			<key>sourceSize</key>
 			<string>{78,79}</string>
 		</dict>
-		<key>down4.png</key>
+		<key>between_up_and_down4.png</key>
 		<dict>
 			<key>frame</key>
 			<string>{{0,235},{76,79}}</string>
@@ -62,13 +62,13 @@
 		<key>format</key>
 		<integer>2</integer>
 		<key>realTextureFileName</key>
-		<string>down.png</string>
+		<string>between_up_and_down.png</string>
 		<key>size</key>
 		<string>{128,512}</string>
 		<key>smartupdate</key>
 		<string>{None}</string>
 		<key>textureFileName</key>
-		<string>down.png</string>
+		<string>between_up_and_down.png</string>
 	</dict>
 </dict>
 </plist>
