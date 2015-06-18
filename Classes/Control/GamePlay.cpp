@@ -6,7 +6,7 @@
 #include "View/Start_Scene.h"
 #include "View/End_Scene.h"
 #include <sstream>
-
+#include "Utility/Config.h"
 using namespace std;
 
 GamePlay::GamePlay()
@@ -33,9 +33,74 @@ bool GamePlay::init()
 	//Xử lý Touch
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->onTouchBegan = CC_CALLBACK_2(GamePlay::onTouchBegan, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
+	//_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
+	//Jump Button
+	jump_Button = Button::create("Button/Jump_Button.png", "Button/Jump_Button_Selected.png", "Button/Jump_Button_Selected.png");
+	jump_Button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+	jump_Button->setOpacity(128);
+	jump_Button->setScale(0.6);
+	jump_Button->setPosition(Point(Config::screenSize.width, jump_Button->getContentSize().width/2));
+	jump_Button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			if (object_Layer->skater->isDeath == false && object_Layer->skater->isJumping == false)
+				{
+					object_Layer->skater->jump_Action();
+				}
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			break;
+		default:
+			break;
+		}
+	});
+	this->addChild(jump_Button);
 
+	//Lower Button
+	lower_Button = Button::create("Button/Lower_Button.png", "Button/Lower_Button_Selected.png", "Button/Lower_Button_Selected.png");
+	lower_Button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+	lower_Button->setOpacity(128);
+	lower_Button->setScale(0.6);
+	lower_Button->setPosition(Point(Config::screenSize.width - lower_Button->getContentSize().width/2, 0));
+	lower_Button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			object_Layer->skater->runAnimation_Down();
+			break;
+		case ui::Widget::TouchEventType::MOVED:
+			object_Layer->skater->runAnimation_Between_Up_And_Down();
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			object_Layer->skater->runAnimation_Up();
+			break;
+		default:
+			break;
+		}
+	});
+	this->addChild(lower_Button);
+
+	//Speed Button
+	speed_Button = Button::create("Button/Speed_Button.png", "Button/Speed_Button_Selected.png", "Button/Speed_Button_Selected.png");
+	speed_Button->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
+	speed_Button->setOpacity(128);
+	speed_Button->setScale(0.6);
+	speed_Button->setPosition(Point(0, 0));
+	speed_Button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type){
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			//My Code
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			break;
+		default:
+			break;
+		}
+	});
+	this->addChild(speed_Button);
 
 	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
 	//this->schedule(schedule_selector(GamePlay::updateBonusX2, 10));
@@ -62,8 +127,6 @@ bool GamePlay::onTouchBegan(Touch *touch, Event *unused_event)
 	if (object_Layer->skater->isDeath == false && object_Layer->skater->isJumping == false)
 	{
 		object_Layer->skater->jump_Action();
-
-		
 	}
 	return true;
 }
@@ -82,14 +145,14 @@ void GamePlay::Set_Object_Layer(Object_Layer * layer)
 	this->object_Layer = layer;
 }
 
-void GamePlay::Set_Background_Layer(Background_Layer * layer)
-{
-	this->background_Layer = layer;
-}
-
 void GamePlay::Set_Score_Layer(Score_Layer * layer)
 {
 	this->score_Layer = layer;
+}
+
+void GamePlay::Set_Background_Layer(Background_Layer * layer)
+{
+	this->background_Layer = layer;
 }
 
 void GamePlay::update(float dt)

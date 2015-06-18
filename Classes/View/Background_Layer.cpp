@@ -1,9 +1,6 @@
 #include "Background_Layer.h"
 #include "Utility/Config.h"
 
-Sprite* _oddBackground;
-Sprite* _evenBackground;
-
 Background_Layer::Background_Layer()
 {
 	speed_Scroll = 100;

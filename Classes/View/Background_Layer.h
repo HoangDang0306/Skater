@@ -13,6 +13,8 @@ public:
 	void endlessBackground();
 	float speed_Scroll;
 	void update(float dt);
+	Sprite* _oddBackground;
+	Sprite* _evenBackground;
 };
 
 #endif
