@@ -4,6 +4,8 @@
 #include "View/Object_Layer.h"
 #include "View/Background_Layer.h"
 #include "View/Score_Layer.h"
+#include "ui/CocosGUI.h"
+using namespace ui;
 USING_NS_CC;
 
 class GamePlay : public Layer
@@ -28,6 +30,11 @@ public:
 	//Score Layer
 	Score_Layer * score_Layer;
 	void Set_Score_Layer(Score_Layer * layer);
+
+	//Button
+	Button * jump_Button;
+	Button * lower_Button;
+	Button * speed_Button;
 
 	//Touch
 	bool onTouchBegan(Touch *touch, Event *unused_event);

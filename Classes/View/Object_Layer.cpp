@@ -47,7 +47,7 @@ bool Object_Layer::init()
 	spawnObs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	spawnObs->SinhCar();
 	spawnObs->SinhAni();
-	this->addChild(spawnObs);
+	//this->addChild(spawnObs);
 
 	return true;
 }

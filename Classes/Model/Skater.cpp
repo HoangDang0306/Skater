@@ -56,6 +56,12 @@ void Skater::runAnimation(string name, int count, float time, bool isRepeat)
 {
 	XHelper::runAnimation(name, count, time, true, this->_sprite);
 }
+
+void Skater::runAnimation_Reserve(string name, int count, float time, bool isRepeat)
+{
+	XHelper::runAnimation_Reverse(name, count, time, isRepeat, this->_sprite);
+}
+
 void Skater::runAnimation_Run()
 {
 	runAnimation("play", 3, 0.5f, true);
@@ -67,11 +73,20 @@ void Skater::runAnimation_Jump()
 }
 void Skater::runAnimation_Fail()
 {
-	runAnimation("fail", 3, 0.5f, true);
+	runAnimation("fail", 3, 0.5f, false);
+	this->isDeath = true;
+}
+void Skater::runAnimation_Up()
+{
+	runAnimation_Reserve("down", 3, 0.1f, false);
+}
+void Skater::runAnimation_Between_Up_And_Down()
+{
+	runAnimation_Reserve("between_up_and_down", 3 , 0.1f, false);
 }
 void Skater::runAnimation_Down()
 {
-	runAnimation("down", 3, 0.1f, true);
+	runAnimation("down", 3, 0.1f, false);
 }
 
 void Skater::jump_Action()
