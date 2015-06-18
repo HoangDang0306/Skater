@@ -85,8 +85,7 @@ void Skater::jump_Action()
 		nullptr));
 
 	//tạo music
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Jump11.wav");
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Jump11.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/beep9.mp3");
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
@@ -100,6 +99,8 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	{
 
 			this->isDeath = true;
+
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
 	}
 
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE)
@@ -122,9 +123,13 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
 			{
 				b->getNode()->removeFromParent();
-				this->coin++;
+				if (bonusX2==true)
+				{
+					this->coin = coin + 2;
+				}
+				else
+					this->coin++;
 
-				CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Pickup_Coin3.wav");
 				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
 			}
 		}
@@ -134,9 +139,13 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
 			{
 				a->getNode()->removeFromParent();
-				this->coin++;
+				if (bonusX2 == true)
+				{
+					this->coin = coin + 2;
+				}
+				else
+					this->coin++;
 
-				CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Pickup_Coin3.wav");
 				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
 			}
 		}
@@ -145,7 +154,20 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 		{
 			this->score++;
 			this->isIncrease = false;
+
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/FinishJump.mp3");
 		}
+
 	}
+
+	//Va chạm với  Bonus X2
+	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BONUSX2)
+		|| (a->getTag() == Tags::BONUSX2 && b->getTag() == Tags::SKATER))
+	{
+		auto e = a->getTag() == Tags::BONUSX2 ? a : b;
+		e->getNode()->removeFromParent();
+		this->bonusX2 = true;
+	}
+
 	return true;
 }

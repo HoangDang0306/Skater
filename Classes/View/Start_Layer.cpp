@@ -3,6 +3,7 @@
 #include "Utility/Config.h"
 #include "ui/CocosGUI.h"
 #include "Model/Skater.h"
+#include "SimpleAudioEngine.h"
 using namespace ui;
 
 Start_Layer::Start_Layer()
@@ -40,6 +41,7 @@ bool Start_Layer::init()
 		case ui::Widget::TouchEventType::BEGAN:
 			break;
 		case ui::Widget::TouchEventType::ENDED:
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/start.mp3");
 			Director::getInstance()->replaceScene(TransitionFade::create(0.5, Play_Scene::create_Play_Scene(), Color3B::WHITE));
 			break;
 		default:

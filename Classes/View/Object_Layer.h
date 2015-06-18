@@ -25,6 +25,7 @@ public:
 	void Spawn_Coin(float dt);
 	void Spawn_Animal(float dt);
 	void Spawn_Obstruction2(float dt);
+	void Spawn_Bonusx2(float dt);
 	float speed_Obs;
 
 

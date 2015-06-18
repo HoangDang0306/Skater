@@ -2,6 +2,7 @@
 #include "Utility/Config.h"
 #include "ui/CocosGUI.h"
 #include "View/Play_Scene.h"
+#include "SimpleAudioEngine.h"
 #include <sstream>
 using namespace std;
 using namespace ui;
@@ -35,6 +36,7 @@ bool End_Layer::init(int score)
 		case ui::Widget::TouchEventType::BEGAN:
 			break;
 		case ui::Widget::TouchEventType::ENDED:
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/start.mp3");
 			Director::getInstance()->replaceScene(TransitionFade::create(0.5, Play_Scene::create_Play_Scene(), Color3B::WHITE));
 			break;
 		default:

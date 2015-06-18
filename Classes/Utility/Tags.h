@@ -33,6 +33,10 @@ public:
 			return "MAIXE";
 		case Tags::NODE_SCORE:
 			return "NODE_SCORE";
+		case Tags::BONUSX2:
+			return "BONUSX2";
+		case Tags::MARGNET:
+			return "MARGNET";
 		default:
 			break;
 
@@ -47,6 +51,8 @@ public:
 	static const int ROAD = 17;
 	static const int MAIXE = 18;
 	static const int NODE_SCORE = 19;
+	static const int BONUSX2 = 20;
+	static const int MARGNET = 21;;
 	Tags();
 	~Tags();
 };

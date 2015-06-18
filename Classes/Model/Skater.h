@@ -22,6 +22,8 @@ public:
 	bool isDeath;
 	bool isJumping;
 	bool isIncrease;
+	bool bonusX2;
+	bool magnet;
 	int coin;
 	int score;
 	static Skater* create(string fileName);
