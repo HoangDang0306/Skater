@@ -102,10 +102,13 @@ bool GamePlay::init()
 	});
 	this->addChild(speed_Button);
 
-//	this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
+	//this->schedule(schedule_selector(GamePlay::updateBonusX2, 10));
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
-//	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
-//	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
+
 	this->scheduleUpdate();
 
 	return true;
@@ -194,3 +197,6 @@ void GamePlay::update(float dt)
 	ss1 << this->object_Layer->skater->score;
 	this->score_Layer->current_Score->setString(ss1.str());
 }
+
+
+

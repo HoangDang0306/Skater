@@ -6,6 +6,8 @@
 #include "Model/Car.h"
 #include "Model/Animal.h"
 #include "Model/Coin.h"
+#include "Model/Bonusx2.h"
+#include "SimpleAudioEngine.h"
 #include <iostream>
 using namespace std;
 USING_NS_CC;
@@ -76,6 +78,9 @@ void Object_Layer::Spawn_Car(float dt)
 	car->MoveCar(randomDis*5, randomDis);
 	car->setPosition(Point(Config::screenSize.width + randomDis*Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	this->addChild(car);
+
+	//tạo music
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/bus.mp3");
 }
 
 void Object_Layer::Spawn_Animal(float dt)
@@ -148,4 +153,20 @@ void Object_Layer::Spawn_Obstruction2(float dt)
 	addChild(foo, 1);
 	auto moveObs = MoveBy::create(7, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	foo->runAction(moveObs);
+}
+
+void Object_Layer::Spawn_Bonusx2(float dt)
+{
+	Bonusx2 * bonus = Bonusx2::create("Bonus/2x.png");
+	bonus->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	bonus->setPosition(Point(Config::screenSize.width + 40, Config::screenSize.height / 2));
+	addChild(bonus, 1);
+	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	bonus->runAction(moveObs);
+
+	////cho 10s 
+	this->runAction(Sequence::create(
+		DelayTime::create(10),
+		nullptr));
+	skater->bonusX2 = false;
 }
