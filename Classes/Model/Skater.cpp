@@ -1,7 +1,7 @@
 ﻿#include "Skater.h"
 #include "Utility/XHelper.h"
 #include "Utility/Tags.h"
-
+#include "SimpleAudioEngine.h"
 Skater::Skater(){}
 Skater::~Skater(){}
 
@@ -84,6 +84,9 @@ void Skater::jump_Action()
 		CallFunc::create(CC_CALLBACK_0(Skater::runAnimation_Run, this)),
 		nullptr));
 
+	//tạo music
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Jump11.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Jump11.wav");
 }
 
 bool Skater::onContactBegin(PhysicsContact& contact)
@@ -120,6 +123,9 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			{
 				b->getNode()->removeFromParent();
 				this->coin++;
+
+				CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Pickup_Coin3.wav");
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
 			}
 		}
 
@@ -129,6 +135,9 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			{
 				a->getNode()->removeFromParent();
 				this->coin++;
+
+				CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sound/Pickup_Coin3.wav");
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
 			}
 		}
 

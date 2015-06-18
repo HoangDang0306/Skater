@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "Model/Skater.h"
 #include "Model/Coin.h"
+#include "Model/SpawnObs.h"
 
 USING_NS_CC;
 
@@ -14,17 +15,17 @@ public:
 	static Object_Layer * create_Object_Layer();
 	bool init();
 
-	//Kiểm tra điều kiện sinh obs
-//	bool sinhCar;
-//	bool sinhAni;
-//	bool sinhCoin;
+	//Generation
+	SpawnObs * spawnObs;
 
 	//Object
 	Skater * skater;
-	void Spawn_Obstruction(float dt);
+	void Spawn_Car(float dt);
 	void Spawn_Coin(float dt);
 	void Spawn_Animal(float dt);
+	void Spawn_Obstruction2(float dt);
 	float speed_Obs;
+
 
 	//Physics
 	PhysicsWorld * physicsWorld;

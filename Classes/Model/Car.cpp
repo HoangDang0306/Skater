@@ -1,25 +1,24 @@
-﻿#include "Obstruction.h"
+﻿#include "Car.h"
 #include "Utility/XHelper.h"
 #include "Utility/Tags.h"
 #include "Utility/Config.h"
 
-Obtruction::Obtruction()
+Car::Car()
 {
 	this->speed_Obs = 6.0f;
 }
 
-Obtruction::~Obtruction(){}
+Car::~Car(){}
 
-Obtruction* Obtruction::create(string fileName)
+Car* Car::create(string fileName)
 {
-	Obtruction* obtruction = new Obtruction();
-	obtruction->init(fileName);
-//	obtruction->MoveObs(this->speed_Obs);
-	obtruction->autorelease();
-	return obtruction;
+	Car* car = new Car();
+	car->init(fileName);
+	car->autorelease();
+	return car;
 }
 
-bool Obtruction::init(string fileName)
+bool Car::init(string fileName)
 {
 	if (!Node::init())
 		return false;
@@ -69,13 +68,19 @@ bool Obtruction::init(string fileName)
 	return true;
 }
 //Animation
-void Obtruction::runAnimation(string name, int count, float time, bool isRepeat)
+void Car::runAnimation(string name, int count, float time, bool isRepeat)
 {
 	XHelper::runAnimation(name, count, time, true, this->_sprite);
 }
 
-void Obtruction::MoveObs(float speed, float distance)
+void Car::MoveCar(float speed, float distance)
 {
 	auto moveObs = MoveTo::create(speed, Vec2(-(distance + 2)*Config::screenSize.width, 0));
+	this->runAction(moveObs);
+}
+
+void Car::MoveCar(float speed)
+{
+	auto moveObs = MoveTo::create(100/speed, Vec2(-Config::screenSize.width * 3 / 2, 0));
 	this->runAction(moveObs);
 }

@@ -1,20 +1,20 @@
-﻿#include "Obstruction_Animal.h"
+﻿#include "Animal.h"
 #include "Utility/Tags.h"
 #include "Utility/Config.h"
 #include "Utility/XHelper.h"
 
-Obstruction_Animal::Obstruction_Animal(){}
-Obstruction_Animal::~Obstruction_Animal(){}
+Animal::Animal(){}
+Animal::~Animal(){}
 
-Obstruction_Animal* Obstruction_Animal::create(string fileName)
+Animal* Animal::create(string fileName)
 {
-	Obstruction_Animal* animal = new Obstruction_Animal();
+	Animal* animal = new Animal();
 	animal->init(fileName);
 	animal->autorelease();
 	return animal;
 }
 
-bool Obstruction_Animal::init(string fileName)
+bool Animal::init(string fileName)
 {
 	if (!Node::init())
 		return false;
@@ -26,7 +26,8 @@ bool Obstruction_Animal::init(string fileName)
 
 
 	//-------------   Physic Body  --------------
-	body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
+	//body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
+	body = PhysicsBody::createCircle(_sprite->getContentSize().width / 2, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
 	body->setGravityEnable(false);
 	body->setDynamic(false);
 	body->setTag(Tags::OBSTRUCTION);
@@ -53,7 +54,13 @@ bool Obstruction_Animal::init(string fileName)
 }
 
 //Animation
-void Obstruction_Animal::runAnimation(string name, int count, float time, bool isRepeat)
+void Animal::runAnimation(string name, int count, float time, bool isRepeat)
 {
 	XHelper::runAnimation(name, count, time, true, this->_sprite);
+}
+
+void Animal::MoveAnimal(float speed)
+{
+	auto moveAni = MoveBy::create(100/speed, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	this->runAction(moveAni);
 }

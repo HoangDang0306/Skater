@@ -15,7 +15,13 @@ class SpawnObs : public Node
 public:
 	SpawnObs();
 	virtual ~SpawnObs();
+	static SpawnObs * createSpawnObs();
 
+	//Speed
+	float speed_Car;
+	float speed_Animal;
+
+	bool isGenerate;
 	void SinhCar();
 	void SinhAni();
 	void SinhObs();
