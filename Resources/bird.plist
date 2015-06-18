@@ -4,57 +4,70 @@
 <dict>
 	<key>frames</key>
 	<dict>
-		<key>down1.png</key>
+		<key>bird1.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{0,158},{76,79}}</string>
+			<string>{{0,491},{148,169}}</string>
 			<key>offset</key>
 			<string>{0,0}</string>
 			<key>rotated</key>
 			<true/>
 			<key>sourceColorRect</key>
-			<string>{{0,0},{76,79}}</string>
+			<string>{{0,0},{148,169}}</string>
 			<key>sourceSize</key>
-			<string>{76,79}</string>
+			<string>{148,169}</string>
 		</dict>
-		<key>down2.png</key>
+		<key>bird2.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{0,0},{78,79}}</string>
+			<string>{{0,340},{150,169}}</string>
 			<key>offset</key>
 			<string>{0,0}</string>
 			<key>rotated</key>
 			<true/>
 			<key>sourceColorRect</key>
-			<string>{{0,0},{78,79}}</string>
+			<string>{{0,0},{150,169}}</string>
 			<key>sourceSize</key>
-			<string>{78,79}</string>
+			<string>{150,169}</string>
 		</dict>
-		<key>down3.png</key>
+		<key>bird3.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{0,79},{78,79}}</string>
+			<string>{{0,170},{175,169}}</string>
 			<key>offset</key>
 			<string>{0,0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
-			<string>{{0,0},{78,79}}</string>
+			<string>{{0,0},{175,169}}</string>
 			<key>sourceSize</key>
-			<string>{78,79}</string>
+			<string>{175,169}</string>
 		</dict>
-		<key>down4.png</key>
+		<key>bird4.png</key>
 		<dict>
 			<key>frame</key>
-			<string>{{0,235},{76,79}}</string>
+			<string>{{0,0},{185,169}}</string>
 			<key>offset</key>
 			<string>{0,0}</string>
 			<key>rotated</key>
-			<true/>
+			<false/>
 			<key>sourceColorRect</key>
-			<string>{{0,0},{76,79}}</string>
+			<string>{{0,0},{185,169}}</string>
 			<key>sourceSize</key>
-			<string>{76,79}</string>
+			<string>{185,169}</string>
+		</dict>
+		<key>bird5.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{0,640},{148,118}}</string>
+			<key>offset</key>
+			<string>{0,0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0,0},{148,118}}</string>
+			<key>sourceSize</key>
+			<string>{148,118}</string>
 		</dict>
 	</dict>
 	<key>metadata</key>
@@ -62,13 +75,13 @@
 		<key>format</key>
 		<integer>2</integer>
 		<key>realTextureFileName</key>
-		<string>down.png</string>
+		<string>bird.png</string>
 		<key>size</key>
-		<string>{128,512}</string>
+		<string>{256,1024}</string>
 		<key>smartupdate</key>
 		<string>{None}</string>
 		<key>textureFileName</key>
-		<string>down.png</string>
+		<string>bird.png</string>
 	</dict>
 </dict>
 </plist>
