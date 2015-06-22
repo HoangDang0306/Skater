@@ -10,6 +10,8 @@ public:
 	~Start_Layer();
 	static Start_Layer * create_Start_Layer();
 	bool init();
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
+
 };
 
 #endif

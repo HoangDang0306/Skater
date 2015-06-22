@@ -18,6 +18,10 @@ bool Start_Layer::init()
 {
 	if (!Layer::init()) return false;
 
+	//Back button
+	this->setKeypadEnabled(true);
+	this->setKeyboardEnabled(true);
+
 	//Background
 	auto background = Sprite::create("Background/Background_4.jpg");
 	background->setPosition(Config::centerPoint);
@@ -59,4 +63,12 @@ Start_Layer * Start_Layer::create_Start_Layer()
 	layer->init();
 	layer->autorelease();
 	return layer;
+}
+
+void Start_Layer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
+{
+	if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+	{
+		Director::getInstance()->end();
+	}
 }

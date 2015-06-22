@@ -18,9 +18,9 @@ private:
 public:
 	Skater();
 	~Skater();
-	bool isAlive;
 	bool isDeath;
 	bool isJumping;
+	bool isDoubleJump;
 	bool isIncrease;
 	bool bonusX2;
 	bool magnet;
@@ -38,6 +38,7 @@ public:
 	void runAnimation_Down();
 
 	void jump_Action();
+	void jump_Action_Double();
 	bool onContactBegin(PhysicsContact &contact);
 };
 

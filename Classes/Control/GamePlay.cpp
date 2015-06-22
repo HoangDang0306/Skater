@@ -49,6 +49,10 @@ bool GamePlay::init()
 				{
 					object_Layer->skater->jump_Action();
 				}
+			else if (object_Layer->skater->isDeath == false && object_Layer->skater->isJumping == true && object_Layer->skater->isDoubleJump == true)
+				{
+					object_Layer->skater->jump_Action_Double();
+				}
 			break;
 		case ui::Widget::TouchEventType::ENDED:
 			break;
@@ -75,6 +79,7 @@ bool GamePlay::init()
 			break;
 		case ui::Widget::TouchEventType::ENDED:
 			object_Layer->skater->runAnimation_Up();
+			object_Layer->skater->runAnimation_Run();
 			break;
 		default:
 			break;
@@ -164,6 +169,7 @@ void GamePlay::update(float dt)
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Car));
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Coin));
 		this->unschedule(schedule_selector(Object_Layer::Spawn_Animal));
+		this->object_Layer->spawnObs->isGenerate = false;
 		
 		//Lưu Highscore
 		bestScore = UserDefault::getInstance()->getIntegerForKey("BESTSCORE");
@@ -173,8 +179,8 @@ void GamePlay::update(float dt)
 		}
 
 		//Chuyển scene
-		auto endScene = End_Scene::create_End_Scene(this->object_Layer->skater->score);
-		Director::getInstance()->replaceScene(TransitionFade::create(0.5, endScene));
+//		auto endScene = End_Scene::create_End_Scene(this->object_Layer->skater->score);
+//		Director::getInstance()->replaceScene(TransitionFade::create(0.5, endScene));
 	}
 
 
