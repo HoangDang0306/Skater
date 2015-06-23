@@ -7,6 +7,7 @@
 
 #include "SpawnObs.h"
 #include "Model/Car.h"
+#include "Model/Bird.h"
 #include "Model/Animal.h"
 #include "Utility/Config.h"
 #include <iostream>
@@ -17,6 +18,7 @@ SpawnObs::SpawnObs() {
 	this->isGenerate = true;
 	this->speed_Animal = 12.5f;
 	this->speed_Car = 16.0f;
+	this->speed_Bird = 14.0f;
 }
 
 SpawnObs::~SpawnObs() {
@@ -44,7 +46,7 @@ void SpawnObs::SinhCar()
 		this->addChild(car);
 
 		auto sinh = CallFunc::create(CC_CALLBACK_0(SpawnObs::SinhCar, this));
-		auto delay = DelayTime::create(random(6, 12));
+		auto delay = DelayTime::create(random(10, 16));
 		this->runAction(Sequence::createWithTwoActions(delay, sinh));
 	}
 }
@@ -76,6 +78,23 @@ void SpawnObs::SinhAni()
 
 		auto sinh = CallFunc::create(CC_CALLBACK_0(SpawnObs::SinhAni, this));
 		auto delay = DelayTime::create(random(4, 15));
+		this->runAction(Sequence::createWithTwoActions(delay, sinh));
+	}
+}
+
+void SpawnObs::SinhBird()
+{
+	if (this->isGenerate)
+	{
+		Bird * bird = Bird::create("bird.png");
+		bird->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+		bird->MoveBird(this->speed_Bird);
+		bird->setScale(0.3);
+		bird->runAnimation("bird", 4, 0.1f, true);
+		this->addChild(bird);
+
+		auto sinh = CallFunc::create(CC_CALLBACK_0(SpawnObs::SinhBird, this));
+		auto delay = DelayTime::create(random(8, 12));
 		this->runAction(Sequence::createWithTwoActions(delay, sinh));
 	}
 }

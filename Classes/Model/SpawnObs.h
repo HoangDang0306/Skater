@@ -20,11 +20,13 @@ public:
 	//Speed
 	float speed_Car;
 	float speed_Animal;
+	float speed_Bird;
 
 	bool isGenerate;
 	void SinhCar();
 	void SinhAni();
 	void SinhObs();
+	void SinhBird();
 };
 
 #endif /* MODEL_SPAWNOBS_H_ */

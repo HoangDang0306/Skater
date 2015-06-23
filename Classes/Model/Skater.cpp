@@ -17,9 +17,10 @@ bool Skater::init(string fileName)
 {
 	if (!Node::init())
 		return false;
-	this->isAlive = true;
 	this->isDeath = false;
 	this->isJumping = false;
+	this->isSitting = false;
+	this->isDoubleJump = false;
 	this->isIncrease = false;
 	this->bonusX2 = false;
 	this->coin = 0;
@@ -27,6 +28,7 @@ bool Skater::init(string fileName)
 
 	//-------------  Khởi tạo sprite chính -------------
 	_sprite = Sprite::create(fileName);
+	_sprite->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	_sprite->setPosition(0, 0);
 	this->addChild(_sprite);
 
@@ -57,43 +59,50 @@ void Skater::runAnimation(string name, int count, float time, bool isRepeat)
 {
 	XHelper::runAnimation(name, count, time, true, this->_sprite);
 }
-
 void Skater::runAnimation_Reserve(string name, int count, float time, bool isRepeat)
 {
 	XHelper::runAnimation_Reverse(name, count, time, isRepeat, this->_sprite);
 }
-
 void Skater::runAnimation_Run()
 {
 	runAnimation("play", 3, 0.5f, true);
+	this->isSitting = false;
+//	this->body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2(0, 0));
+//	this->setPhysicsBody(body);
 }
-
 void Skater::runAnimation_Jump()
 {
 	runAnimation("jump", 5, 0.2f, false);
+	this->isSitting = false;
 }
 void Skater::runAnimation_Fail()
 {
-	runAnimation("fail", 3, 0.5f, false);
+	runAnimation("fail", 3, 0.1f, false);
 	this->isDeath = true;
+	this->isSitting = false;
 }
 void Skater::runAnimation_Up()
 {
 	runAnimation_Reserve("down", 3, 0.1f, false);
+	this->isSitting = false;
 }
 void Skater::runAnimation_Between_Up_And_Down()
 {
-	runAnimation_Reserve("between_up_and_down", 3 , 0.1f, false);
+	runAnimation("between_up_and_down", 3 , 0.1f, false);
+	this->isSitting = true;
 }
 void Skater::runAnimation_Down()
 {
 	runAnimation("down", 3, 0.1f, false);
+	this->isSitting = true;
+//	body = PhysicsBody::createBox(Size(77,77), PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2(0, 0));
+//	this->setPhysicsBody(body);
 }
-
 void Skater::jump_Action()
 {
 	this->body->applyImpulse(Vec2(0, 12000));
 	this->isJumping = true;
+	this->isDoubleJump = true;
 	this->runAnimation_Jump();
 	this->runAction(Sequence::create(
 		DelayTime::create(1),
@@ -101,9 +110,16 @@ void Skater::jump_Action()
 		nullptr));
 
 	//tạo music
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/beep9.mp3");
+	//CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/beep9.mp3");
 }
-
+void Skater::jump_Action_Double()
+{
+	this->isDoubleJump = false;
+	this->body->applyImpulse(Vec2(0, 8500));
+	this->runAnimation_Between_Up_And_Down();
+	auto rotation = RotateBy::create(0.5, 360);
+	this->runAction(rotation);
+}
 bool Skater::onContactBegin(PhysicsContact& contact)
 {
 	auto a = contact.getShapeA()->getBody();
@@ -115,8 +131,20 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	{
 
 			this->isDeath = true;
-
+			//this->runAnimation_Fail();
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+	}
+
+	//Va chạm với Bird
+	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BIRD)
+		|| (a->getTag() == Tags::BIRD && b->getTag() == Tags::SKATER))
+	{
+		if (this->isSitting == false)
+		{
+			this->isDeath = true;
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+		}
+
 	}
 
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE)

@@ -5,6 +5,7 @@
 #include "Model/Coin.h"
 #include "Model/Car.h"
 #include "Model/Animal.h"
+#include "Model/Bird.h"
 #include "Model/Coin.h"
 #include "Model/Bonusx2.h"
 #include "SimpleAudioEngine.h"
@@ -34,7 +35,7 @@ bool Object_Layer::init()
 
 	//Road
 	Node * road = Node::create();
-	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 10.5);
+	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 11);
 	road->setAnchorPoint(Vec2::ANCHOR_MIDDLE_TOP);
 	PhysicsBody * body_Road = PhysicsBody::createBox(Size(Config::screenSize.width, Config::screenSize.height / 8), PHYSICSBODY_MATERIAL_DEFAULT, Vec2::ZERO);
 	body_Road->setTag(Tags::ROAD);
@@ -49,7 +50,8 @@ bool Object_Layer::init()
 	spawnObs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 	spawnObs->SinhCar();
 	spawnObs->SinhAni();
-	//this->addChild(spawnObs);
+//	spawnObs->SinhBird();
+	this->addChild(spawnObs);
 
 	return true;
 }
@@ -169,4 +171,15 @@ void Object_Layer::Spawn_Bonusx2(float dt)
 		DelayTime::create(10),
 		nullptr));
 	skater->bonusX2 = false;
+}
+
+void Object_Layer::Spawn_Bird(float dt)
+{
+	Bird * bird = Bird::create("bird.png");
+	bird->setPosition(Point(Config::screenSize.width, Config::centerPoint.y-100));
+	bird->setScale(0.3f);
+	bird->runAnimation("bird", 4, 0.1f, true);
+	addChild(bird, 1);
+	auto moveObs = MoveBy::create(7, Vec2(-Config::screenSize.width * 3 / 2, 0));
+	bird->runAction(moveObs);
 }
