@@ -108,7 +108,7 @@ bool GamePlay::init()
 	});
 	this->addChild(speed_Button);
 
-	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
