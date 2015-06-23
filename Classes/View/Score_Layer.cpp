@@ -1,11 +1,13 @@
 #include "Score_Layer.h"
 #include "Utility/Config.h"
+#include "Model/PowerSpeed.h"
 #include <sstream>
 using namespace std;
 
 
 Score_Layer::Score_Layer()
 {
+	this->heso_Scale = 1.0f;
 }
 
 
@@ -68,6 +70,22 @@ bool Score_Layer::init()
 	coin->setPosition(Config::screenSize.width * 8.75 / 10 + text_Coin->getContentSize().width / 2, Config::screenSize.height);
 	this->addChild(coin);
 
+	//Power Speed
+	Label * power_Label = Label::create("Power:", "fonts/Kidfont.ttf", 45, Size::ZERO, TextHAlignment::LEFT, TextVAlignment::TOP);
+	power_Label->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
+	power_Label->setColor(Color3B::WHITE);
+	power_Label->setPosition(Config::screenSize.width / 2 , Config::screenSize.height - text_current_Score->getContentSize().height * 3 / 2.5);
+	this->addChild(power_Label);
+
+	Sprite * border = Sprite::create("Power_Speed_Border.png");
+	border->setPosition(Config::screenSize.width / 2 + power_Label->getContentSize().width + 10, power_Label->getPositionY() - power_Label->getContentSize().height/2);
+	border->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
+	this->addChild(border);
+
+	this->power_bar = Power_Speed::create_Power_Speed();
+	this->power_bar->setPosition(Config::screenSize.width / 2 + power_Label->getContentSize().width + 10, power_Label->getPositionY() - power_Label->getContentSize().height/2);
+	this->power_bar->Set_Scale(this->heso_Scale);
+	this->addChild(power_bar);
 	return true;
 }
 

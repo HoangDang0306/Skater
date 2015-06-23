@@ -14,6 +14,7 @@ GamePlay::GamePlay()
 {
 	this->sosanh = 1;
 	this->isSpeedUp = true; //True la dc phep Speed Up
+	this->isSpeeding = false;
 	this->setKeypadEnabled(true);
 	this->setKeyboardEnabled(true);
 }
@@ -104,6 +105,7 @@ bool GamePlay::init()
 		case ui::Widget::TouchEventType::BEGAN:
 			if (this->isSpeedUp == true)
 			{
+				this->isSpeeding = true;
 				SpeedUp();
 			}
 			break;
@@ -115,17 +117,12 @@ bool GamePlay::init()
 	});
 	this->addChild(speed_Button);
 
-<<<<<<< HEAD
-	//this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
-=======
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
-//	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 5);
->>>>>>> 3d3309eb3e62bc46fdfd878b22f66f24f3b20361
-	//this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
-	//this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
-	//this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
 
 	this->scheduleUpdate();
 
@@ -214,6 +211,18 @@ void GamePlay::update(float dt)
 
 		this->object_Layer->skater->isIncrease = true;
 		this->sosanh++;
+	}
+
+	//Speed
+	if (this->isSpeeding == true && score_Layer->heso_Scale > 0.02f)
+	{
+		score_Layer->heso_Scale -= dt/5;
+		score_Layer->power_bar->Set_Scale(score_Layer->heso_Scale);
+	}
+	if (score_Layer->heso_Scale <= 0.02f)
+	{
+		this->isSpeedUp = false;
+		this->isSpeeding = false;
 	}
 
 	//Coin
