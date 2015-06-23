@@ -35,6 +35,7 @@ public:
 	Button * jump_Button;
 	Button * lower_Button;
 	Button * speed_Button;
+	bool isSpeedUp;
 	void SpeedUp();
 
 	//Touch

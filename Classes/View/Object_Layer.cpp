@@ -32,11 +32,11 @@ bool Object_Layer::init()
 	skater = Skater::create("0.png");
 	skater->setPosition(Config::centerPoint.x-250, Config::centerPoint.y-150);
 	skater->runAnimation_Run();
-	this->addChild(skater);
+	this->addChild(skater, 10);
 
 	//Road
 	Node * road = Node::create();
-	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 11);
+	road->setPosition(Config::screenSize.width / 2, Config::screenSize.height / 14);
 	road->setAnchorPoint(Vec2::ANCHOR_MIDDLE_TOP);
 	PhysicsBody * body_Road = PhysicsBody::createBox(Size(Config::screenSize.width, Config::screenSize.height / 8), PHYSICSBODY_MATERIAL_DEFAULT, Vec2::ZERO);
 	body_Road->setTag(Tags::ROAD);
@@ -184,4 +184,20 @@ void Object_Layer::Spawn_Bird(float dt)
 //	bird->MoveBird(this->speed_Bird);
 //	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
 //	bird->runAction(moveObs);
+}
+
+void Object_Layer::Show_SpeedUp()
+{
+	this->hinhmo = Sprite::create("hinhmo.png");
+	hinhmo->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	hinhmo->setPosition(Config::centerPoint);
+	hinhmo->setOpacity(192);
+	hinhmo->setScale(Config::getScale(hinhmo));
+	this->addChild(hinhmo, 9);
+
+	this->fire = Sprite::create("Speed_Skate.png");
+	fire->setAnchorPoint(Vec2::ANCHOR_MIDDLE_RIGHT);
+	fire->setScale(0.5f);
+	fire->setPosition(Point(- this->skater->_sprite->getContentSize().width/4.5, - this->skater->_sprite->getContentSize().height/3));
+	this->skater->addChild(fire);
 }

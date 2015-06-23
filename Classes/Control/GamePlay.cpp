@@ -13,6 +13,7 @@ using namespace std;
 GamePlay::GamePlay()
 {
 	this->sosanh = 1;
+	this->isSpeedUp = true; //True la dc phep Speed Up
 	this->setKeypadEnabled(true);
 	this->setKeyboardEnabled(true);
 }
@@ -101,7 +102,10 @@ bool GamePlay::init()
 		switch (type)
 		{
 		case ui::Widget::TouchEventType::BEGAN:
-			SpeedUp();
+			if (this->isSpeedUp == true)
+			{
+				SpeedUp();
+			}
 			break;
 		case ui::Widget::TouchEventType::ENDED:
 			break;
@@ -166,7 +170,9 @@ void GamePlay::Set_Background_Layer(Background_Layer * layer)
 
 void GamePlay::SpeedUp()
 {
-	this->background_Layer->speed_Scroll += 100;
+	object_Layer->Show_SpeedUp();
+	this->background_Layer->speed_Scroll = 2000;
+	this->isSpeedUp = false;
 }
 
 void GamePlay::update(float dt)

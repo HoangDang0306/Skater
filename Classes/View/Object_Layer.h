@@ -18,6 +18,11 @@ public:
 	//Generation
 	SpawnObs * spawnObs;
 
+	//Speed Up
+	Sprite * hinhmo;
+	Sprite * fire;
+	void Show_SpeedUp();
+
 	//Object
 	Skater * skater;
 	void Spawn_Car(float dt);

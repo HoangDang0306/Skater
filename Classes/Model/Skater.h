@@ -10,7 +10,7 @@ using namespace std;
 
 class Skater : public Node
 {
-private:
+public:
 	Sprite * _sprite;
 	bool init(string fileName);
 	PhysicsBody * body;
