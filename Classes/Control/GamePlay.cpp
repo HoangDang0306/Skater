@@ -12,6 +12,9 @@ using namespace std;
 
 GamePlay::GamePlay()
 {
+	this->sosanh = 1;
+	this->setKeypadEnabled(true);
+	this->setKeyboardEnabled(true);
 }
 
 
@@ -27,9 +30,9 @@ bool GamePlay::init()
 	//Best Score
 	bestScore = 0;
 
-	//Back button
-	this->setKeypadEnabled(true);
-	this->setKeyboardEnabled(true);
+//	//Back button
+//	this->setKeypadEnabled(true);
+//	this->setKeyboardEnabled(true);
 
 	//Xử lý Touch
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -98,7 +101,7 @@ bool GamePlay::init()
 		switch (type)
 		{
 		case ui::Widget::TouchEventType::BEGAN:
-			//My Code
+			SpeedUp();
 			break;
 		case ui::Widget::TouchEventType::ENDED:
 			break;
@@ -108,10 +111,10 @@ bool GamePlay::init()
 	});
 	this->addChild(speed_Button);
 
-	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 5);
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
+//	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
 
@@ -161,6 +164,11 @@ void GamePlay::Set_Background_Layer(Background_Layer * layer)
 	this->background_Layer = layer;
 }
 
+void GamePlay::SpeedUp()
+{
+	this->background_Layer->speed_Scroll += 100;
+}
+
 void GamePlay::update(float dt)
 {
 	if (object_Layer->skater->isDeath == true)
@@ -186,12 +194,15 @@ void GamePlay::update(float dt)
 
 
 	//Tăng speed cuộn background và speed di chuyển của Obs
-	if ((this->object_Layer->skater->score % 9) == 0 && this->object_Layer->skater->isIncrease == false)
+	if ((this->object_Layer->skater->score % this->sosanh) == 0 && this->object_Layer->skater->isIncrease == false)
 	{
-		background_Layer->speed_Scroll += 78;
-		object_Layer->spawnObs->speed_Animal +=8;
-		object_Layer->spawnObs->speed_Car +=8;
+		background_Layer->speed_Scroll += 10;
+		object_Layer->spawnObs->speed_Animal +=4;
+		object_Layer->spawnObs->speed_Car +=4;
+		object_Layer->spawnObs->speed_Bird += 4;
+
 		this->object_Layer->skater->isIncrease = true;
+		this->sosanh++;
 	}
 
 	//Coin

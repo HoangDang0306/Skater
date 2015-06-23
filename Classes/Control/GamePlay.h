@@ -35,6 +35,7 @@ public:
 	Button * jump_Button;
 	Button * lower_Button;
 	Button * speed_Button;
+	void SpeedUp();
 
 	//Touch
 	bool onTouchBegan(Touch *touch, Event *unused_event);
@@ -43,6 +44,7 @@ public:
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
 
 	//Update
+	int sosanh;
 	void update(float dt);
 };
 
