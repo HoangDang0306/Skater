@@ -2,6 +2,7 @@
 #include "Model/Skater.h"
 #include "View/Object_Layer.h"
 #include "Model/Car.h"
+#include "Model/Bird.h"
 #include "Utility/Tags.h"
 #include "View/Start_Scene.h"
 #include "View/End_Scene.h"
@@ -108,7 +109,7 @@ bool GamePlay::init()
 	this->addChild(speed_Button);
 
 	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
-	//this->schedule(schedule_selector(GamePlay::updateBonusX2, 10));
+	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
 	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
@@ -185,11 +186,11 @@ void GamePlay::update(float dt)
 
 
 	//Tăng speed cuộn background và speed di chuyển của Obs
-	if ((this->object_Layer->skater->score % 10) == 0 && this->object_Layer->skater->isIncrease == false)
+	if ((this->object_Layer->skater->score % 9) == 0 && this->object_Layer->skater->isIncrease == false)
 	{
-		background_Layer->speed_Scroll += 75;
-		object_Layer->spawnObs->speed_Animal +=5;
-		object_Layer->spawnObs->speed_Car +=5;
+		background_Layer->speed_Scroll += 78;
+		object_Layer->spawnObs->speed_Animal +=8;
+		object_Layer->spawnObs->speed_Car +=8;
 		this->object_Layer->skater->isIncrease = true;
 	}
 

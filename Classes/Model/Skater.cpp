@@ -19,6 +19,7 @@ bool Skater::init(string fileName)
 		return false;
 	this->isDeath = false;
 	this->isJumping = false;
+	this->isSitting = false;
 	this->isDoubleJump = false;
 	this->isIncrease = false;
 	this->bonusX2 = false;
@@ -65,29 +66,35 @@ void Skater::runAnimation_Reserve(string name, int count, float time, bool isRep
 void Skater::runAnimation_Run()
 {
 	runAnimation("play", 3, 0.5f, true);
+	this->isSitting = false;
 //	this->body = PhysicsBody::createBox(_sprite->getBoundingBox().size, PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2(0, 0));
 //	this->setPhysicsBody(body);
 }
 void Skater::runAnimation_Jump()
 {
 	runAnimation("jump", 5, 0.2f, false);
+	this->isSitting = false;
 }
 void Skater::runAnimation_Fail()
 {
 	runAnimation("fail", 3, 0.1f, false);
 	this->isDeath = true;
+	this->isSitting = false;
 }
 void Skater::runAnimation_Up()
 {
 	runAnimation_Reserve("down", 3, 0.1f, false);
+	this->isSitting = false;
 }
 void Skater::runAnimation_Between_Up_And_Down()
 {
 	runAnimation("between_up_and_down", 3 , 0.1f, false);
+	this->isSitting = true;
 }
 void Skater::runAnimation_Down()
 {
 	runAnimation("down", 3, 0.1f, false);
+	this->isSitting = true;
 //	body = PhysicsBody::createBox(Size(77,77), PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2(0, 0));
 //	this->setPhysicsBody(body);
 }
@@ -126,6 +133,18 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 			this->isDeath = true;
 			//this->runAnimation_Fail();
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+	}
+
+	//Va chạm với Bird
+	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BIRD)
+		|| (a->getTag() == Tags::BIRD && b->getTag() == Tags::SKATER))
+	{
+		if (this->isSitting == false)
+		{
+			this->isDeath = true;
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+		}
+
 	}
 
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE)

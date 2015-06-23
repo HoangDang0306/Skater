@@ -21,6 +21,7 @@ public:
 	bool isDeath;
 	bool isJumping;
 	bool isDoubleJump;
+	bool isSitting;
 	bool isIncrease;
 	bool bonusX2;
 	bool magnet;

@@ -37,6 +37,8 @@ public:
 			return "BONUSX2";
 		case Tags::MARGNET:
 			return "MARGNET";
+		case Tags::BIRD:
+			return "BIRD";
 		default:
 			break;
 
@@ -52,7 +54,8 @@ public:
 	static const int MAIXE = 18;
 	static const int NODE_SCORE = 19;
 	static const int BONUSX2 = 20;
-	static const int MARGNET = 21;;
+	static const int MARGNET = 21;
+	static const int BIRD = 22;
 	Tags();
 	~Tags();
 };
