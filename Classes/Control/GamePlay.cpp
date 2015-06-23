@@ -115,8 +115,13 @@ bool GamePlay::init()
 	});
 	this->addChild(speed_Button);
 
+<<<<<<< HEAD
+	//this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
+=======
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 5);
+>>>>>>> 3d3309eb3e62bc46fdfd878b22f66f24f3b20361
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
 	//this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);

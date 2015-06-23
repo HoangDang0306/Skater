@@ -52,7 +52,11 @@ bool Object_Layer::init()
 	spawnObs->SinhCar();
 	spawnObs->SinhAni();
 	spawnObs->SinhBird();
+<<<<<<< HEAD
+	this->addChild(spawnObs);
+=======
 //	this->addChild(spawnObs);
+>>>>>>> 3d3309eb3e62bc46fdfd878b22f66f24f3b20361
 
 	return true;
 }
