@@ -3,7 +3,7 @@
 
 Background_Layer::Background_Layer()
 {
-	speed_Scroll = 100;
+	speed_Scroll = 150;
 }
 
 

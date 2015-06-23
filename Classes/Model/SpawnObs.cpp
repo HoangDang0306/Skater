@@ -46,7 +46,7 @@ void SpawnObs::SinhCar()
 		this->addChild(car);
 
 		auto sinh = CallFunc::create(CC_CALLBACK_0(SpawnObs::SinhCar, this));
-		auto delay = DelayTime::create(random(10, 16));
+		auto delay = DelayTime::create(random(10, 20));
 		this->runAction(Sequence::createWithTwoActions(delay, sinh));
 	}
 }
@@ -77,7 +77,7 @@ void SpawnObs::SinhAni()
 		this->addChild(ani);
 
 		auto sinh = CallFunc::create(CC_CALLBACK_0(SpawnObs::SinhAni, this));
-		auto delay = DelayTime::create(random(4, 15));
+		auto delay = DelayTime::create(random(5, 15));
 		this->runAction(Sequence::createWithTwoActions(delay, sinh));
 	}
 }
@@ -90,6 +90,7 @@ void SpawnObs::SinhBird()
 		bird->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		bird->MoveBird(this->speed_Bird);
 		bird->setScale(0.3);
+		bird->setPosition(Point(0, Config::centerPoint.y/4));
 		bird->runAnimation("bird", 4, 0.1f, true);
 		this->addChild(bird);
 

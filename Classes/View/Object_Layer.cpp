@@ -16,6 +16,7 @@ Object_Layer::Object_Layer()
 {
 	//Speed
 	speed_Obs = 3.5f;
+	this->speed_Bird = 14.0f;
 }
 
 
@@ -51,7 +52,11 @@ bool Object_Layer::init()
 	spawnObs->SinhCar();
 	spawnObs->SinhAni();
 	spawnObs->SinhBird();
+<<<<<<< HEAD
 	this->addChild(spawnObs);
+=======
+//	this->addChild(spawnObs);
+>>>>>>> 3d3309eb3e62bc46fdfd878b22f66f24f3b20361
 
 	return true;
 }
@@ -176,10 +181,11 @@ void Object_Layer::Spawn_Bonusx2(float dt)
 void Object_Layer::Spawn_Bird(float dt)
 {
 	Bird * bird = Bird::create("bird.png");
-	bird->setPosition(Point(Config::screenSize.width, Config::centerPoint.y-100));
+	bird->setPosition(Point(Config::screenSize.width, Config::centerPoint.y-80));
 	bird->setScale(0.3f);
 	bird->runAnimation("bird", 4, 0.1f, true);
 	addChild(bird, 1);
-	auto moveObs = MoveBy::create(7, Vec2(-Config::screenSize.width * 3 / 2, 0));
-	bird->runAction(moveObs);
+//	bird->MoveBird(this->speed_Bird);
+//	auto moveObs = MoveBy::create(6, Vec2(-Config::screenSize.width * 3 / 2, 0));
+//	bird->runAction(moveObs);
 }

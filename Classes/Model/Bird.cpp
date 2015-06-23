@@ -52,10 +52,10 @@ bool Bird::init(string fileName)
 
 		//Score
 		auto nodeScore = Node::create();
-		nodeScore->setPosition(_sprite->getContentSize().width * 2.1 / 4, Config::screenSize.height/2 /*_sprite->getContentSize().height * 2.3 / 3*/);
+		nodeScore->setPosition(Point::ZERO);
 		nodeScore->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-		_sprite->addChild(nodeScore);
-		PhysicsBody * bodyNodeScore = PhysicsBody::createBox(Size(_sprite->getContentSize().width * 2.5 / 5, Config::screenSize.height), PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
+		this->addChild(nodeScore);
+		PhysicsBody * bodyNodeScore = PhysicsBody::createBox(Size(_sprite->getContentSize().width * 2.5 / 5, Config::screenSize.height*4), PhysicsMaterial(100.0f, 0.0f, 100.0f), Vec2::ZERO);
 		bodyNodeScore->setTag(Tags::NODE_SCORE);
 		bodyNodeScore->setDynamic(false);
 		bodyNodeScore->setCategoryBitmask(0x01);
@@ -73,6 +73,6 @@ void Bird::runAnimation(string name, int count, float time, bool isRepeat)
 
 void Bird::MoveBird(float speed)
 {
-	auto moveAni = MoveBy::create(100/speed, Vec2(-Config::screenSize.width * 3 / 2, 0));
-	this->runAction(moveAni);
+	auto moveBird = MoveBy::create(100/speed, Vec2(- Config::screenSize.width * 3 / 2, 0));
+	this->runAction(moveBird);
 }

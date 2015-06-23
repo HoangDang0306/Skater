@@ -27,6 +27,7 @@ public:
 	void Spawn_Bird(float dt);
 	void Spawn_Bonusx2(float dt);
 	float speed_Obs;
+	float speed_Bird;
 
 
 	//Physics
