@@ -39,6 +39,8 @@ public:
 			return "MARGNET";
 		case Tags::BIRD:
 			return "BIRD";
+		case Tags::BATTERY:
+			return "BATTERY";
 		default:
 			break;
 
@@ -56,6 +58,7 @@ public:
 	static const int BONUSX2 = 20;
 	static const int MARGNET = 21;
 	static const int BIRD = 22;
+	static const int BATTERY = 23;
 	Tags();
 	~Tags();
 };

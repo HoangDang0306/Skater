@@ -17,6 +17,8 @@ Object_Layer::Object_Layer()
 	//Speed
 	speed_Obs = 3.5f;
 	this->speed_Bird = 14.0f;
+//	this->hinhmo = Sprite::create("hinhmo.png");
+//	this->fire = Sprite::create("Speed_Skate.png");
 }
 
 
@@ -49,10 +51,10 @@ bool Object_Layer::init()
 	//Spawn
 	spawnObs = SpawnObs::createSpawnObs();
 	spawnObs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
-	spawnObs->SinhCar();
-	spawnObs->SinhAni();
+//	spawnObs->SinhCar();
+//	spawnObs->SinhAni();
 	spawnObs->SinhBird();
-	//this->addChild(spawnObs);
+	this->addChild(spawnObs);
 
 	return true;
 }

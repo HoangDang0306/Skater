@@ -15,6 +15,8 @@ GamePlay::GamePlay()
 	this->sosanh = 1;
 	this->isSpeedUp = true; //True la dc phep Speed Up
 	this->isSpeeding = false;
+	this->isRemoved = false;
+	this->current_Speed_Scoll_Background = 0;
 	this->setKeypadEnabled(true);
 	this->setKeyboardEnabled(true);
 }
@@ -173,8 +175,10 @@ void GamePlay::Set_Background_Layer(Background_Layer * layer)
 void GamePlay::SpeedUp()
 {
 	object_Layer->Show_SpeedUp();
+	this->current_Speed_Scoll_Background = background_Layer->speed_Scroll;
 	this->background_Layer->speed_Scroll = 2000;
 	this->isSpeedUp = false;
+	this->isRemoved = false;
 }
 
 void GamePlay::update(float dt)
@@ -204,7 +208,8 @@ void GamePlay::update(float dt)
 	//Tăng speed cuộn background và speed di chuyển của Obs
 	if ((this->object_Layer->skater->score % this->sosanh) == 0 && this->object_Layer->skater->isIncrease == false)
 	{
-		background_Layer->speed_Scroll += 10;
+		background_Layer->speed_Scroll += 20;
+		current_Speed_Scoll_Background += 20;
 		object_Layer->spawnObs->speed_Animal +=4;
 		object_Layer->spawnObs->speed_Car +=4;
 		object_Layer->spawnObs->speed_Bird += 4;
@@ -214,16 +219,24 @@ void GamePlay::update(float dt)
 	}
 
 	//Speed
-	if (this->isSpeeding == true && score_Layer->heso_Scale > 0.02f)
+	if (this->isSpeeding == true && score_Layer->heso_Scale > 0.02f)//Dang speedUp
 	{
 		score_Layer->heso_Scale -= dt/5;
 		score_Layer->power_bar->Set_Scale(score_Layer->heso_Scale);
 	}
-	if (score_Layer->heso_Scale <= 0.02f)
+	if (score_Layer->heso_Scale <= 0.02f)//Het luc
 	{
 		this->isSpeedUp = false;
 		this->isSpeeding = false;
 	}
+	if	(this->isSpeedUp == false && this->isSpeeding == false && this->isRemoved == false)//Sau khi SpeedUp xong
+	{
+		object_Layer->fire->removeFromParent();
+		object_Layer->hinhmo->removeFromParent();
+		background_Layer->speed_Scroll = this->current_Speed_Scoll_Background;
+		this->isRemoved = true;
+	}
+
 
 	//Coin
 	stringstream ss;

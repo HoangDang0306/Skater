@@ -37,6 +37,8 @@ public:
 	Button * speed_Button;
 	bool isSpeedUp;
 	bool isSpeeding;
+	bool isRemoved;
+	float current_Speed_Scoll_Background;
 	void SpeedUp();
 
 	//Touch
