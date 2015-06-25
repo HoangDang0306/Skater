@@ -96,3 +96,8 @@ Score_Layer * Score_Layer::create_Score_Layer()
 	layer->autorelease();
 	return layer;
 }
+
+void Score_Layer::UpdatePower()
+{
+	this->power_bar->Set_Scale(this->heso_Scale);
+}

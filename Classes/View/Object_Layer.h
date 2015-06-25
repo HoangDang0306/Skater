@@ -31,6 +31,7 @@ public:
 	void Spawn_Obstruction2(float dt);
 	void Spawn_Bird(float dt);
 	void Spawn_Bonusx2(float dt);
+	void Spawn_Battery(float dt);
 	float speed_Obs;
 	float speed_Bird;
 

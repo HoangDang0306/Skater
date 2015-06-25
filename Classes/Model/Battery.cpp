@@ -6,6 +6,8 @@
  */
 
 #include "Battery.h"
+#include "Utility/Config.h"
+#include "Utility/Tags.h"
 
 Battery::Battery() {
 	// TODO Auto-generated constructor stub

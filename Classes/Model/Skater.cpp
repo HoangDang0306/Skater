@@ -125,93 +125,103 @@ bool Skater::onContactBegin(PhysicsContact& contact)
 	auto a = contact.getShapeA()->getBody();
 	auto b = contact.getShapeB()->getBody();
 
-	//----------------   Va chạm vơi chướng ngại vật   ---------
-	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
-		|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
-	{
+//	//----------------   Va chạm vơi chướng ngại vật   ---------
+//	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
+//		|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
+//	{
+//
+//			this->isDeath = true;
+//			//this->runAnimation_Fail();
+//			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+//	}
+//
+//	//Va chạm với Bird
+//	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BIRD)
+//		|| (a->getTag() == Tags::BIRD && b->getTag() == Tags::SKATER))
+//	{
+//		if (this->isSitting == false)
+//		{
+//			this->isDeath = true;
+//			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+//		}
+//
+//	}
+//
+//	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE)
+//		|| (a->getTag() == Tags::MAIXE && b->getTag() == Tags::SKATER))
+//	{
+//		this->isJumping = false;
+//	}
+//
+//	//Va cham voi ROAD
+//	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::ROAD) || (a->getTag() == Tags::ROAD && b->getTag() == Tags::SKATER))
+//	{
+//		this->isJumping = false;
+//	}
+//
+//	//Va chạm với COIN
+//	if ((a->getCategoryBitmask() & b->getCollisionBitmask()) == 0 || (b->getCategoryBitmask() & a->getCollisionBitmask()) == 0)
+//	{
+//		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+//		{
+//			if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
+//			{
+//				b->getNode()->removeFromParent();
+//				if (bonusX2==true)
+//				{
+//					this->coin = coin + 2;
+//				}
+//				else
+//					this->coin++;
+//
+//				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
+//			}
+//		}
+//
+//		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
+//		{
+//			if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
+//			{
+//				a->getNode()->removeFromParent();
+//				if (bonusX2 == true)
+//				{
+//					this->coin = coin + 2;
+//				}
+//				else
+//					this->coin++;
+//
+//				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
+//			}
+//		}
+//
+//		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::NODE_SCORE) || (b->getTag() == Tags::SKATER && a->getTag() == Tags::NODE_SCORE))
+//		{
+//			this->score++;
+//			this->isIncrease = false;
+//
+//			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/FinishJump.mp3");
+//		}
+//
+//	}
+//
+//	//Va chạm với  Bonus X2
+//	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BONUSX2)
+//		|| (a->getTag() == Tags::BONUSX2 && b->getTag() == Tags::SKATER))
+//	{
+//		auto e = a->getTag() == Tags::BONUSX2 ? a : b;
+//		e->getNode()->removeFromParent();
+//		this->bonusX2 = true;
+//	}
 
-			this->isDeath = true;
-			//this->runAnimation_Fail();
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
-	}
-
-	//Va chạm với Bird
-	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BIRD)
-		|| (a->getTag() == Tags::BIRD && b->getTag() == Tags::SKATER))
-	{
-		if (this->isSitting == false)
-		{
-			this->isDeath = true;
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
-		}
-
-	}
-
-	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE)
-		|| (a->getTag() == Tags::MAIXE && b->getTag() == Tags::SKATER))
-	{
-		this->isJumping = false;
-	}
-	
-	//Va cham voi ROAD
-	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::ROAD) || (a->getTag() == Tags::ROAD && b->getTag() == Tags::SKATER))
-	{
-		this->isJumping = false;
-	}
-
-	//Va chạm với COIN
-	if ((a->getCategoryBitmask() & b->getCollisionBitmask()) == 0 || (b->getCategoryBitmask() & a->getCollisionBitmask()) == 0)
-	{
-		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
-		{
-			if (a->getTag() == Tags::SKATER && b->getTag() == Tags::COIN)
-			{
-				b->getNode()->removeFromParent();
-				if (bonusX2==true)
-				{
-					this->coin = coin + 2;
-				}
-				else
-					this->coin++;
-
-				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
-			}
-		}
-
-		if (a != NULL && b != NULL && a->getNode() != NULL && b->getNode() != NULL)
-		{
-			if (b->getTag() == Tags::SKATER && a->getTag() == Tags::COIN)
-			{
-				a->getNode()->removeFromParent();
-				if (bonusX2 == true)
-				{
-					this->coin = coin + 2;
-				}
-				else
-					this->coin++;
-
-				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Pickup_Coin3.wav");
-			}
-		}
-
-		if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::NODE_SCORE) || (b->getTag() == Tags::SKATER && a->getTag() == Tags::NODE_SCORE))
-		{
-			this->score++;
-			this->isIncrease = false;
-
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/FinishJump.mp3");
-		}
-
-	}
-
-	//Va chạm với  Bonus X2
-	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BONUSX2)
-		|| (a->getTag() == Tags::BONUSX2 && b->getTag() == Tags::SKATER))
-	{
-		auto e = a->getTag() == Tags::BONUSX2 ? a : b;
-		e->getNode()->removeFromParent();
-		this->bonusX2 = true;
-	}
+//	//Va cham giua Skater vs Battery
+//	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BATTERY)
+//		|| (a->getTag() == Tags::BATTERY && b->getTag() == Tags::SKATER))
+//	{
+//		auto e = a->getTag() == Tags::BATTERY ? a : b;
+//		e->getNode()->removeFromParent();
+//		if (this->battery < 1.0) battery += 0.25;
+//		if (battery > 1.0) battery = 1.0;
+//	}
 
 	return true;
 }

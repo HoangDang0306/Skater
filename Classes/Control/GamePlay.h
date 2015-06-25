@@ -41,8 +41,9 @@ public:
 	float current_Speed_Scoll_Background;
 	void SpeedUp();
 
-	//Touch
+	//Touch & Contact
 	bool onTouchBegan(Touch *touch, Event *unused_event);
+	bool onContactBegin(PhysicsContact &contact);
 
 	//Back Button
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event);

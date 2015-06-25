@@ -7,6 +7,7 @@
 #include "Model/Animal.h"
 #include "Model/Bird.h"
 #include "Model/Coin.h"
+#include "Model/Battery.h"
 #include "Model/Bonusx2.h"
 #include "SimpleAudioEngine.h"
 #include <iostream>
@@ -53,7 +54,8 @@ bool Object_Layer::init()
 	spawnObs->setPosition(Point(Config::screenSize.width, Config::screenSize.height / 10.5 + Config::screenSize.height / 9));
 //	spawnObs->SinhCar();
 //	spawnObs->SinhAni();
-	spawnObs->SinhBird();
+//	spawnObs->SinhBird();
+	spawnObs->SinhBattery();
 	this->addChild(spawnObs);
 
 	return true;
@@ -202,4 +204,13 @@ void Object_Layer::Show_SpeedUp()
 	fire->setScale(0.5f);
 	fire->setPosition(Point(- this->skater->_sprite->getContentSize().width/4.5, - this->skater->_sprite->getContentSize().height/3));
 	this->skater->addChild(fire);
+}
+
+void Object_Layer::Spawn_Battery(float dt)
+{
+	Battery * bat = Battery::create_Battery();
+	bat->setPosition(Point(Config::screenSize.width, Config::centerPoint.y-80));
+	bat->setScale(0.3f);
+	bat->MoveBattery(15);
+	addChild(bat, 1);
 }

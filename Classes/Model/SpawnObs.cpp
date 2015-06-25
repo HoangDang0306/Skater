@@ -10,6 +10,7 @@
 #include "Model/Bird.h"
 #include "Model/Animal.h"
 #include "Utility/Config.h"
+#include "Model/Battery.h"
 #include <iostream>
 using namespace std;
 
@@ -19,6 +20,7 @@ SpawnObs::SpawnObs() {
 	this->speed_Animal = 12.5f;
 	this->speed_Car = 16.0f;
 	this->speed_Bird = 14.0f;
+	this->speed_Battery = 15.0f;
 }
 
 SpawnObs::~SpawnObs() {
@@ -98,4 +100,17 @@ void SpawnObs::SinhBird()
 		auto delay = DelayTime::create(random(8, 12));
 		this->runAction(Sequence::createWithTwoActions(delay, sinh));
 	}
+}
+
+void SpawnObs::SinhBattery()
+{
+	Battery * bat = Battery::create_Battery();
+	bat->setPosition(Point(0, Config::centerPoint.y/4));
+	bat->setScale(0.3f);
+	bat->MoveBattery(this->speed_Battery);
+	this->addChild(bat, 1);
+
+	auto sinh = CallFunc::create(CC_CALLBACK_0(SpawnObs::SinhBattery, this));
+	auto delay = DelayTime::create(random(2, 4));
+	this->runAction(Sequence::createWithTwoActions(delay, sinh));
 }

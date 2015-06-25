@@ -22,6 +22,7 @@ public:
 	//Power Speed
 	float heso_Scale;
 	Power_Speed * power_bar;
+	void UpdatePower();
 };
 
 #endif
