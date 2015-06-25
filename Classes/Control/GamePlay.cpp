@@ -136,10 +136,10 @@ bool GamePlay::init() {
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 12);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
-	this->schedule(schedule_selector(Object_Layer::Spawn_Battery), 5);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Battery), 15);
 	this->scheduleUpdate();
 
 	//contact listner
@@ -349,13 +349,13 @@ void GamePlay::update(float dt) {
 	//Tăng speed cuộn background và speed di chuyển của Obs
 	if ((this->object_Layer->skater->score % this->sosanh) == 0 && this->object_Layer->skater->isIncrease == false)
 	{
-		background_Layer->speed_Scroll += 40;
-		current_Speed_Scoll_Background += 40;
+		background_Layer->speed_Scroll += 30;
+		current_Speed_Scoll_Background += 30;
 		current_Speed_Animal += 0.4;
 		current_Speed_Car += 0.8;
-		object_Layer->spawnObs->speed_Animal += 0.4;
-		object_Layer->spawnObs->speed_Car += 0.4;
-		object_Layer->spawnObs->speed_Bird += 0.4;
+		object_Layer->spawnObs->speed_Animal += 1.0;
+		object_Layer->spawnObs->speed_Car += 1.0;
+		object_Layer->spawnObs->speed_Bird += 1.0;
 
 		this->object_Layer->skater->isIncrease = true;
 		this->sosanh++;

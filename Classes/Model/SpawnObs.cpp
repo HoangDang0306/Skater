@@ -17,9 +17,9 @@ using namespace std;
 SpawnObs::SpawnObs() {
 	// TODO Auto-generated constructor stub
 	this->isGenerate = true;
-	this->speed_Animal = 13.0f;
-	this->speed_Car = 16.0f;
-	this->speed_Bird = 13.0f;
+	this->speed_Animal = 16.0f;
+	this->speed_Car = 20.0f;
+	this->speed_Bird = 16.0f;
 	this->speed_Animal_2 = 26.0f;
 	this->speed_Car_2 = 32.0f;
 	this->speed_Bird_2 = 26.0f;
