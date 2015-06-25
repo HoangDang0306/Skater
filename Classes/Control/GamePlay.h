@@ -39,7 +39,10 @@ public:
 	bool isSpeeding;
 	bool isRemoved;
 	float current_Speed_Scoll_Background;
+	float current_Speed_Animal;
+	float current_Speed_Car;
 	void SpeedUp();
+	void UpdateSpeed();
 
 	//Touch & Contact
 	bool onTouchBegan(Touch *touch, Event *unused_event);

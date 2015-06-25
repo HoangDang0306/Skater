@@ -23,7 +23,7 @@ bool Play_Scene::init()
 Scene * Play_Scene::create_Play_Scene()
 {
 	auto scene = Scene::createWithPhysics();
-	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	scene->getPhysicsWorld()->setSpeed(3.0f);
 	scene->getPhysicsWorld()->setGravity(Vect(0, -145.0f));
 	scene->getPhysicsWorld()->setUpdateRate(0.5f);

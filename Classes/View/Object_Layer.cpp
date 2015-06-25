@@ -55,7 +55,7 @@ bool Object_Layer::init()
 //	spawnObs->SinhCar();
 //	spawnObs->SinhAni();
 //	spawnObs->SinhBird();
-	spawnObs->SinhBattery();
+	spawnObs->Random_Spawn();
 	this->addChild(spawnObs);
 
 	return true;

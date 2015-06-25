@@ -21,14 +21,22 @@ public:
 	float speed_Car;
 	float speed_Animal;
 	float speed_Bird;
+	float speed_Car_2;
+	float speed_Animal_2;
+	float speed_Bird_2;
 	float speed_Battery;
 
 	bool isGenerate;
-	void SinhCar();
-	void SinhAni();
+	void Random_Spawn();
+	void SpeedUp_Spawn();
+	void SinhCar(float speed);
+	void SinhAni(float speed);
 	void SinhObs();
-	void SinhBird();
+	void SinhBird(float speed);
 	void SinhBattery();
+
+	//Random
+	int max_Random;
 };
 
 #endif /* MODEL_SPAWNOBS_H_ */

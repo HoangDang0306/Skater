@@ -18,6 +18,8 @@ GamePlay::GamePlay() {
 	this->isSpeeding = false;
 	this->isRemoved = false;
 	this->current_Speed_Scoll_Background = 0;
+	this->current_Speed_Animal = 0;
+	this->current_Speed_Car = 0;
 	this->setKeypadEnabled(true);
 	this->setKeyboardEnabled(true);
 }
@@ -134,11 +136,10 @@ bool GamePlay::init() {
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Bonusx2), 20);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Bird), 20);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Car), 8);
-//	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
+	this->schedule(schedule_selector(Object_Layer::Spawn_Coin), 10);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Animal), 5);
 //	this->schedule(schedule_selector(Object_Layer::Spawn_Obstruction2), 16);
-//	this->schedule(schedule_selector(Object_Layer::Spawn_Battery), 5);
-
+	this->schedule(schedule_selector(Object_Layer::Spawn_Battery), 5);
 	this->scheduleUpdate();
 
 	//contact listner
@@ -187,26 +188,48 @@ bool GamePlay::onContactBegin(PhysicsContact &contact) {
 
 	//----------------   Va chạm Skater vơi chướng ngại vật   ---------
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::OBSTRUCTION)
-			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER)) {
-		object_Layer->skater->isDeath = true;
-		//this->runAnimation_Fail();
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-				"Sound/Powerup10.wav");
+			|| (a->getTag() == Tags::OBSTRUCTION && b->getTag() == Tags::SKATER))
+	{
+		if (this->isSpeeding == false)
+		{
+			object_Layer->skater->isDeath = true;
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+		}
+		else if (this->isSpeeding == true)
+		{
+			auto e = a->getTag() == Tags::OBSTRUCTION ? a : b;
+			e->getNode()->removeFromParent();
+		}
+
 	}
 
 	//Va chạm với Bird
 	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::BIRD)
-			|| (a->getTag() == Tags::BIRD && b->getTag() == Tags::SKATER)) {
-		if (object_Layer->skater->isSitting == false) {
+			|| (a->getTag() == Tags::BIRD && b->getTag() == Tags::SKATER))
+	{
+		if (object_Layer->skater->isSitting == false && this->isSpeeding == false)
+		{
 			object_Layer->skater->isDeath = true;
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					"Sound/Powerup10.wav");
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sound/Powerup10.wav");
+		}
+		else if (this->isSpeeding == true)
+		{
+			auto e = a->getTag() == Tags::BIRD ? a : b;
+			e->getNode()->removeFromParent();
 		}
 	}
 
-	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE)
-			|| (a->getTag() == Tags::MAIXE && b->getTag() == Tags::SKATER)) {
-		object_Layer->skater->isJumping = false;
+	if ((a->getTag() == Tags::SKATER && b->getTag() == Tags::MAIXE) || (a->getTag() == Tags::MAIXE && b->getTag() == Tags::SKATER))
+	{
+		if (this->isSpeeding == false)
+		{
+			object_Layer->skater->isJumping = false;
+		}
+		else if (this->isSpeeding == true)
+		{
+			auto e = a->getTag() == Tags::MAIXE ? a : b;
+			e->getNode()->removeFromParent();
+		}
 	}
 
 	//Va cham voi ROAD
@@ -284,13 +307,22 @@ void GamePlay::Set_Background_Layer(Background_Layer * layer) {
 	this->background_Layer = layer;
 }
 
-void GamePlay::SpeedUp() {
+void GamePlay::SpeedUp()
+{
 	object_Layer->Show_SpeedUp();
 	this->current_Speed_Scoll_Background = background_Layer->speed_Scroll;
-	this->background_Layer->speed_Scroll = 2000;
+	this->background_Layer->speed_Scroll = 2500;
+//	this->object_Layer->spawnObs->speed_Animal = 35;
+//	this->object_Layer->spawnObs->speed_Bird = 35;
+//	this->object_Layer->spawnObs->speed_Car = 40;
 	this->object_Layer->spawnObs->speed_Battery = 50;
 	this->isSpeedUp = false;
 	this->isRemoved = false;
+}
+
+void GamePlay::UpdateSpeed()
+{
+
 }
 
 void GamePlay::update(float dt) {
@@ -310,18 +342,20 @@ void GamePlay::update(float dt) {
 		}
 
 		//Chuyển scene
-//		auto endScene = End_Scene::create_End_Scene(this->object_Layer->skater->score);
-//		Director::getInstance()->replaceScene(TransitionFade::create(0.5, endScene));
+		auto endScene = End_Scene::create_End_Scene(this->object_Layer->skater->score);
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5, endScene));
 	}
 
 	//Tăng speed cuộn background và speed di chuyển của Obs
 	if ((this->object_Layer->skater->score % this->sosanh) == 0 && this->object_Layer->skater->isIncrease == false)
 	{
-		background_Layer->speed_Scroll += 20;
-		current_Speed_Scoll_Background += 20;
-		object_Layer->spawnObs->speed_Animal += 4;
-		object_Layer->spawnObs->speed_Car += 4;
-		object_Layer->spawnObs->speed_Bird += 4;
+		background_Layer->speed_Scroll += 40;
+		current_Speed_Scoll_Background += 40;
+		current_Speed_Animal += 0.4;
+		current_Speed_Car += 0.8;
+		object_Layer->spawnObs->speed_Animal += 0.4;
+		object_Layer->spawnObs->speed_Car += 0.4;
+		object_Layer->spawnObs->speed_Bird += 0.4;
 
 		this->object_Layer->skater->isIncrease = true;
 		this->sosanh++;
@@ -329,27 +363,32 @@ void GamePlay::update(float dt) {
 
 	//Speed
 	if (this->isSpeeding == true && score_Layer->heso_Scale > 0.02f) //Dang speedUp
-			{
+	{
 		score_Layer->heso_Scale -= dt / 5;
 		score_Layer->power_bar->Set_Scale(score_Layer->heso_Scale);
+		object_Layer->spawnObs->max_Random = 1;
+//		object_Layer->spawnObs->SpeedUp_Spawn();
 	}
 	if (score_Layer->heso_Scale <= 0.02f) //Het luc
-			{
+	{
 		this->isSpeedUp = false;
 		this->isSpeeding = false;
 	}
-	if (this->isSpeedUp == false && this->isSpeeding == false
-			&& this->isRemoved == false) //Sau khi SpeedUp xong
-					{
+	if (this->isSpeedUp == false && this->isSpeeding == false && this->isRemoved == false) //Sau khi SpeedUp xong
+	{
+		object_Layer->spawnObs->max_Random = 8; //Thoi gian sinh Obs
 		object_Layer->skater->battery = 0.02f;
 //		score_Layer->heso_Scale = object_Layer->skater->battery;
 		object_Layer->fire->removeFromParent();
 		object_Layer->hinhmo->removeFromParent();
 		background_Layer->speed_Scroll = this->current_Speed_Scoll_Background;
+//		object_Layer->spawnObs->speed_Animal = this->current_Speed_Animal;
+//		object_Layer->spawnObs->speed_Bird = this->current_Speed_Animal;
+//		object_Layer->spawnObs->speed_Car = this->current_Speed_Car;
 		this->isRemoved = true;
 	}
 	if (score_Layer->heso_Scale <= 0.02f) //Co luc
-			{
+	{
 		this->isSpeedUp = true;
 	}
 
